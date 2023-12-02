@@ -1,0 +1,17 @@
+{
+	"name": "waveforms",
+	"private": true,
+	"scripts": {
+		"dev": "dotenv -- pnpm run --parallel -r dev",
+		"build": "pnpm run --parallel -r build",
+		"start": "dotenv -- pnpm run --parallel -r preview",
+		"lint": "pnpm run --parallel -r lint"
+	},
+	"devDependencies": {
+		"dotenv-cli": "^7.3.0",
+		"eslint": "8.55.0",
+		"eslint-config-custom": "^0.0.0",
+		"prettier": "^3.1.0",
+		"prettier-plugin-svelte": "^3.1.2"
+	}
+}
