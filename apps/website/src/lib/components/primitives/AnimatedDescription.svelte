@@ -17,17 +17,9 @@
 	}
 </script>
 
-<div class="description" transition:transition={{}}>
+<div transition:transition={{}}>
 	<slot />
 </div>
 
 <style>
-	.description {
-		width: 512px;
-
-		display: flex;
-		flex-direction: column;
-		row-gap: var(--spacing24);
-		align-items: center;
-	}
 </style>

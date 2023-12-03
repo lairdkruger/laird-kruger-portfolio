@@ -28,4 +28,11 @@
 		top: var(--margin);
 		right: var(--margin);
 	}
+
+	@media (max-width: 640px) {
+		.information {
+			top: auto;
+			bottom: var(--margin);
+		}
+	}
 </style>

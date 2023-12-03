@@ -27,4 +27,10 @@
 		display: flex;
 		column-gap: var(--spacing8);
 	}
+
+	@media (max-width: 640px) {
+		.wrapper {
+			flex-direction: column-reverse;
+		}
+	}
 </style>

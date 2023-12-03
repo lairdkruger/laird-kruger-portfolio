@@ -10,31 +10,43 @@
 <InformationLayout>
 	<AnimatedHeading slot="heading">{project.title}</AnimatedHeading>
 	<AnimatedDescription slot="content">
-		<p>{project.description}</p>
+		<div class="description">
+			<p>{project.description}</p>
 
-		{#if project.credits}
-			<div class="credits">
-				{#each project.credits as credit}
-					<span class="credit">
-						{#if credit.creditText}
-							<span>{credit.creditText}</span>
-						{/if}
+			{#if project.credits}
+				<div class="credits">
+					{#each project.credits as credit}
+						<span class="credit">
+							{#if credit.creditText}
+								<span>{credit.creditText}</span>
+							{/if}
 
-						{#if credit.linkText}
-							<a href={credit.link}>{credit.linkText}</a>
-						{/if}
-					</span>
-				{/each}
-			</div>
-		{/if}
+							{#if credit.linkText}
+								<a href={credit.link}>{credit.linkText}</a>
+							{/if}
+						</span>
+					{/each}
+				</div>
+			{/if}
 
-		{#if project.url}
-			<a href={project.url} target="_blank" rel="noopener noreferrer">View Project</a>
-		{/if}
+			{#if project.url}
+				<a href={project.url} target="_blank" rel="noopener noreferrer">View Project</a>
+			{/if}
+		</div>
 	</AnimatedDescription>
 </InformationLayout>
 
 <style>
+	.description {
+		width: 512px;
+		max-width: calc(100vw - 2 * var(--margin));
+
+		display: flex;
+		flex-direction: column;
+		row-gap: var(--spacing24);
+		align-items: center;
+	}
+
 	.credits {
 		display: flex;
 		flex-direction: column;

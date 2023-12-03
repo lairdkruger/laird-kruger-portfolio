@@ -86,4 +86,14 @@ button:disabled {
 	line-height: 0.82;
 	margin-bottom: -9px;
 	padding: 0px;
+
+	@media (max-width: 1000px) {
+		font-size: 48px;
+		margin-bottom: -7px;
+	}
+
+	@media (max-width: 640px) {
+		font-size: 32px;
+		margin-bottom: -3px;
+	}
 }
