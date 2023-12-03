@@ -20,12 +20,41 @@ body {
 	color: var(--white);
 }
 
+body[data-theme='dark'] {
+	background-color: var(--black);
+	color: var(--white);
+}
+
+body[data-theme='light'] {
+	background-color: var(--white);
+	color: var(--white);
+}
+
 /* css resets */
 *,
 *::before,
 *::after {
 	box-sizing: inherit;
 	margin: 0;
+}
+
+div {
+	pointer-events: none;
+}
+
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+button,
+input,
+textarea {
+	pointer-events: auto;
 }
 
 input,
@@ -50,8 +79,8 @@ button {
 
 /* Extras */
 ::selection {
-	background: var(--black);
-	color: var(--white);
+	background: var(--white);
+	color: var(--black);
 }
 
 /* Hide arrows in number inputs */

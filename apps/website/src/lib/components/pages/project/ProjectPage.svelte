@@ -16,8 +16,13 @@
 			<div class="credits">
 				{#each project.credits as credit}
 					<span class="credit">
-						<span>{credit.creditText}</span>
-						<a href={credit.link}>{credit.linkText}</a>
+						{#if credit.creditText}
+							<span>{credit.creditText}</span>
+						{/if}
+
+						{#if credit.linkText}
+							<a href={credit.link}>{credit.linkText}</a>
+						{/if}
 					</span>
 				{/each}
 			</div>
@@ -34,5 +39,6 @@
 		display: flex;
 		flex-direction: column;
 		row-gap: var(--spacing4);
+		align-items: center;
 	}
 </style>

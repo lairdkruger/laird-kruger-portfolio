@@ -1,5 +1,4 @@
 export interface Project {
-	index: number
 	type: 'initial' | 'info' | 'work'
 	title: string
 	slug: string
@@ -14,7 +13,6 @@ export interface Project {
 }
 
 export const home: Project = {
-	index: 0,
 	type: 'initial',
 	title: 'Laird Kruger',
 	slug: '/',
@@ -22,9 +20,8 @@ export const home: Project = {
 	description: 'Independent creative developer and digital designer'
 }
 
-export const info: Project[] = [
+export const information: Project[] = [
 	{
-		index: 1,
 		type: 'info',
 		title: 'About Me',
 		slug: 'about',
@@ -45,7 +42,6 @@ export const info: Project[] = [
 		]
 	},
 	{
-		index: 2,
 		type: 'info',
 		title: 'Experience',
 		slug: 'experience',
@@ -54,7 +50,6 @@ export const info: Project[] = [
 			'2019 → BsC in Computer Science and Philosophy → 2020 → Full-stack at Psychoactive Studios → 2021 → Independent developer and designer'
 	},
 	{
-		index: 3,
 		type: 'info',
 		title: 'Technologies',
 		slug: 'technologies',
@@ -103,7 +98,6 @@ export const info: Project[] = [
 
 export const projects: Project[] = [
 	{
-		index: 4,
 		type: 'work',
 		title: 'WAVEFORMS',
 		slug: 'waveforms',
@@ -113,7 +107,6 @@ export const projects: Project[] = [
 			'Concept + design + development of WAVEFORMS App → a collection of realtime web-based audio reactive visualizers'
 	},
 	{
-		index: 5,
 		type: 'work',
 		title: 'Zendetta',
 		slug: 'zendetta',
@@ -150,7 +143,6 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		index: 6,
 		type: 'work',
 		title: 'Otherside',
 		slug: 'otherside',
@@ -160,7 +152,6 @@ export const projects: Project[] = [
 			'Showcase of the development template used by Otherside Directory → a concept collective'
 	},
 	{
-		index: 7,
 		type: 'work',
 		title: 'Embryonic',
 		slug: 'embryonic',
@@ -170,7 +161,6 @@ export const projects: Project[] = [
 			'Blockchain NFT minting site for ARTHAUS project + Creation of template respository for future blockchain/NFT projects'
 	},
 	{
-		index: 8,
 		type: 'work',
 		title: 'Studio S II',
 		slug: 'studio-s-ii',
@@ -193,7 +183,6 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		index: 9,
 		type: 'work',
 		title: '0xigami',
 		slug: 'oxigami',
@@ -202,7 +191,6 @@ export const projects: Project[] = [
 		description: 'Brand identity and guidelines for sci-fi blockchain project'
 	},
 	{
-		index: 10,
 		type: 'work',
 		title: 'Gallery',
 		slug: 'gallery',
@@ -211,7 +199,6 @@ export const projects: Project[] = [
 		description: "Gallery site for Kieran Kruger's photography"
 	},
 	{
-		index: 11,
 		type: 'work',
 		title: 'Newfoundland',
 		slug: 'newfoundland',
@@ -220,7 +207,6 @@ export const projects: Project[] = [
 		description: 'Experimental case study website created for pseudostudio newfoundland'
 	},
 	{
-		index: 12,
 		type: 'work',
 		title: 'Lotties Study',
 		slug: 'lotties-study',

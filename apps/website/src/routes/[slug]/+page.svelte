@@ -7,7 +7,7 @@
 	export let data: PageData
 
 	onMount(() => {
-		pageTheme.set('dark')
+		pageTheme.set('light')
 	})
 </script>
 

@@ -11,8 +11,17 @@
 	import PageTransition from '$lib/components/layouts/PageTransition.svelte'
 	import Canvas from '$lib/components/canvas/Canvas.svelte'
 	import Monoliths from '$lib/components/canvas/scenes/Monoliths.svelte'
+	import { pageTheme } from '$lib/stores/ui.js'
 
 	export let data
+
+	$: if (typeof window !== 'undefined') {
+		if ($pageTheme === 'dark') {
+			document.body.dataset.theme = 'dark'
+		} else {
+			document.body.dataset.theme = 'light'
+		}
+	}
 </script>
 
 <svelte:head>
