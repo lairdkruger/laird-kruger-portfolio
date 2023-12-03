@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte'
 	import type { PageData } from './$types'
 	import { pageTheme } from '$lib/stores/ui'
-	import { activeProject } from '$lib/stores/projects'
+	import { activeProject, activeProjectType } from '$lib/stores/projects'
 	import { getWebglContext } from '$lib/contexts/webgl'
 
 	export let data: PageData
@@ -17,6 +17,7 @@
 	$: if ($rapierWorld) {
 		setTimeout(() => {
 			activeProject.set(data.props.project.slug)
+			activeProjectType.set(data.props.project.type)
 		}, 0)
 	}
 </script>

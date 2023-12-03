@@ -16,6 +16,7 @@ interface WebglContext {
 	rapierWorld: Writable<World | null>
 	initWebgl: (canvas: HTMLCanvasElement) => void
 	onClick: (callback: EventCallback) => void
+	onResize: (callback: EventCallback) => void
 	onFrame: (callback: WebglFrameCallback) => void
 }
 
@@ -32,11 +33,12 @@ export function createWebglContext(key?: string) {
 	const rapierCurrent: Writable<Rapier | null> = writable(null)
 	const rapierWorldCurrent: Writable<World | null> = writable(null)
 
-	const frameCallbacks: WebglFrameCallback[] = []
-	const clickCallbacks: EventCallback[] = []
+	const onFrameCallbacks: WebglFrameCallback[] = []
+	const onClickCallbacks: EventCallback[] = []
+	const onResizeCallbacks: EventCallback[] = []
 	const clock = new Clock()
 
-	function onResize() {
+	function handleResize() {
 		const camera = get(cameraCurrent)
 		const renderer = get(rendererCurrent)
 
@@ -44,6 +46,23 @@ export function createWebglContext(key?: string) {
 		camera.aspect = window.innerWidth / window.innerHeight
 		camera.updateProjectionMatrix()
 		renderer.setSize(window.innerWidth, window.innerHeight)
+
+		for (const callback of onResizeCallbacks) {
+			callback()
+		}
+	}
+
+	function handlePointerMove(event: MouseEvent) {
+		const x = (event.clientX / window.innerWidth) * 2 - 1
+		const y = -(event.clientY / window.innerHeight) * 2 + 1
+		const vector = new Vector2(x, y)
+		pointerCurrent.set(vector)
+	}
+
+	function handleClick() {
+		for (const callback of onClickCallbacks) {
+			callback()
+		}
 	}
 
 	async function init(canvas: HTMLCanvasElement) {
@@ -79,33 +98,34 @@ export function createWebglContext(key?: string) {
 		rapierCurrent.set(rapierInstance)
 		const rapier = get(rapierCurrent)!
 
-		const world = new rapier.World({ x: 0.0, y: 0.0, z: 0.0 })
+		const world = new rapier.World({ x: 0.0, y: -9.81, z: 0.0 })
 		rapierWorldCurrent.set(world)
 
 		// Events
-		window.addEventListener('resize', onResize)
+		window.addEventListener('resize', () => {
+			handleResize()
+		})
 		window.addEventListener('pointermove', (event) => {
-			const x = (event.clientX / window.innerWidth) * 2 - 1
-			const y = -(event.clientY / window.innerHeight) * 2 + 1
-			const vector = new Vector2(x, y)
-			pointerCurrent.set(vector)
+			handlePointerMove(event)
 		})
 		canvas.addEventListener('click', () => {
-			for (const callback of clickCallbacks) {
-				callback()
-			}
+			handleClick()
 		})
 
-		// Animate
+		handleResize()
 		loop()
 	}
 
 	function onFrame(callback: WebglFrameCallback) {
-		frameCallbacks.push(callback)
+		onFrameCallbacks.push(callback)
 	}
 
 	function onClick(callback: EventCallback) {
-		clickCallbacks.push(callback)
+		onClickCallbacks.push(callback)
+	}
+
+	function onResize(callback: EventCallback) {
+		onResizeCallbacks.push(callback)
 	}
 
 	function render() {
@@ -131,7 +151,7 @@ export function createWebglContext(key?: string) {
 	function loop() {
 		const elapsedTime = clock.getElapsedTime()
 
-		for (const callback of frameCallbacks) {
+		for (const callback of onFrameCallbacks) {
 			callback({ elapsedTime })
 		}
 
@@ -148,6 +168,7 @@ export function createWebglContext(key?: string) {
 		rapierWorld: rapierWorldCurrent,
 		initWebgl: (canvas: HTMLCanvasElement) => init(canvas),
 		onClick: onClick,
+		onResize: onResize,
 		onFrame: onFrame
 	})
 }

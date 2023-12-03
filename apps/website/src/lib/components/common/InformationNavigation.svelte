@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { projects } from '$lib/data/projects'
+	import { information } from '$lib/data/projects'
 	import NavigationMonolith from '../primitives/NavigationMonolith.svelte'
 </script>
 
 <div class="wrapper">
 	<div class="label">
-		<h2 class="heading">Selected Work</h2>
+		<h2 class="heading">Information</h2>
 	</div>
 
 	<div class="navigation">
-		{#each projects as project}
-			<NavigationMonolith route={`/projects/${project.slug}`} />
+		{#each information as info}
+			<NavigationMonolith route={`/${info.slug}`} />
 		{/each}
 	</div>
 </div>
@@ -18,8 +18,8 @@
 <style>
 	.wrapper {
 		display: flex;
-		flex-direction: column-reverse;
-		align-items: flex-start;
+		flex-direction: column;
+		align-items: flex-end;
 		row-gap: var(--spacing4);
 	}
 

@@ -2,8 +2,16 @@
 	import { goto } from '$app/navigation'
 	import { getWebglContext } from '$lib/contexts/webgl'
 	import type { Project } from '$lib/data/projects'
-	import { activeMass, defaultMass, impulseForce, slabSize } from '$lib/stores/physics'
-	import { activeProject, activeProjectPosition } from '$lib/stores/projects'
+	import {
+		activeMass,
+		bounce,
+		defaultMass,
+		friction,
+		impulseForce,
+		minimalMass,
+		slabSize
+	} from '$lib/stores/physics'
+	import { activeProject, activeProjectPosition, activeProjectType } from '$lib/stores/projects'
 	import type { RigidBody } from '@dimforge/rapier3d'
 	import { onDestroy } from 'svelte'
 	import {
@@ -68,8 +76,8 @@
 			slabSize[1] / 2,
 			slabSize[2] / 2
 		)
-			.setFriction(0)
-			.setRestitution(1)
+			.setFriction(friction)
+			.setRestitution(bounce)
 
 		$rapierWorld.createCollider(colliderDesc, physicsBody)
 	}
@@ -86,11 +94,23 @@
 		}
 	})
 
-	$: if (isActiveProject && $rapierWorld) {
+	// Effects
+	$: if (isActiveProject) {
 		physicsBody?.applyImpulse({ x: 0, y: 0, z: -impulseForce }, true)
 		physicsBody?.setAdditionalMass(activeMass, true)
 	} else {
 		physicsBody?.setAdditionalMass(defaultMass, true)
+	}
+
+	$: if ($activeProjectType === 'info') {
+		physicsBody?.setGravityScale(0, true)
+		physicsBody?.setAdditionalMass(activeMass, true)
+		physicsBody?.applyImpulse({ x: 0, y: impulseForce * 2, z: 0 }, true)
+		mesh.material.wireframe = false
+	} else {
+		physicsBody?.setGravityScale(1, true)
+		physicsBody?.setAdditionalMass(minimalMass, true)
+		mesh.material.wireframe = true
 	}
 
 	onFrame(() => {

@@ -5,7 +5,6 @@
 	export let route: string
 
 	$: isActive = route === $page.url.pathname
-	$: console.log(isActive, route, $page.url.pathname)
 </script>
 
 <a href={route}>

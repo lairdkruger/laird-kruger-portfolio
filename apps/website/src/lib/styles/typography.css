@@ -47,10 +47,6 @@ h6 {
 	letter-spacing: 0.02em;
 }
 
-h2 {
-	margin-bottom: var(--spacing8);
-}
-
 p {
 	font-variation-settings:
 		'wdth' var(--wdthBody),

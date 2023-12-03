@@ -1,10 +1,22 @@
 <script lang="ts">
 	import { getWebglContext } from '$lib/contexts/webgl'
 	import { activeProjectPosition } from '$lib/stores/projects'
+	import { visibleHeightAtZDepth, visibleWidthAtZDepth } from '$lib/utils/webgl'
 	import { onDestroy } from 'svelte'
 	import { BufferGeometry, LineBasicMaterial, Vector3, Line } from 'three'
 
-	const { scene, onFrame } = getWebglContext()
+	const { scene, onFrame, onResize, camera } = getWebglContext()
+
+	let sceneHeight = 0
+	let sceneWidth = 0
+
+	onResize(() => {
+		if (!$camera) return
+		sceneHeight = visibleHeightAtZDepth(0, $camera)
+		sceneWidth = visibleWidthAtZDepth(0, $camera)
+	})
+
+	$: console.log('sceneHeight', sceneHeight, sceneWidth)
 
 	const topLineGeometry = new BufferGeometry()
 	const rightLineGeometry = new BufferGeometry()
@@ -23,23 +35,21 @@
 	const bottomLine = new Line(bottomLineGeometry, lineMaterial)
 	const leftLine = new Line(leftLineGeometry, lineMaterial)
 
-	const pointsTop = [new Vector3(0, 0, 0), new Vector3(0, 5, 0)]
-	const pointsRight = [new Vector3(0, 0, 0), new Vector3(5, 0, 0)]
-	const pointsBottom = [new Vector3(0, 0, 0), new Vector3(0, -5, 0)]
-	const pointsLeft = [new Vector3(0, 0, 0), new Vector3(-5, 0, 0)]
+	let pointsTop = [new Vector3(0, 0, 0), new Vector3(0, sceneHeight / 2, 0)]
+	let pointsRight = [new Vector3(0, 0, 0), new Vector3(sceneWidth / 2, 0, 0)]
+	let pointsBottom = [new Vector3(0, 0, 0), new Vector3(0, -sceneHeight / 2, 0)]
+	let pointsLeft = [new Vector3(0, 0, 0), new Vector3(-sceneWidth / 2, 0, 0)]
 
 	topLineGeometry.setFromPoints(pointsTop)
 	rightLineGeometry.setFromPoints(pointsRight)
 	bottomLineGeometry.setFromPoints(pointsBottom)
 	leftLineGeometry.setFromPoints(pointsLeft)
 
-	console.log(topLine)
-
 	onFrame(() => {
-		pointsTop[0] = $activeProjectPosition
-		pointsRight[0] = $activeProjectPosition
-		pointsBottom[0] = $activeProjectPosition
-		pointsLeft[0] = $activeProjectPosition
+		pointsTop = [$activeProjectPosition, new Vector3(0, sceneHeight / 2, 0)]
+		pointsRight = [$activeProjectPosition, new Vector3(sceneWidth / 2, 0, 0)]
+		pointsBottom = [$activeProjectPosition, new Vector3(0, -sceneHeight / 2, 0)]
+		pointsLeft = [$activeProjectPosition, new Vector3(-sceneWidth / 2, 0, 0)]
 
 		topLineGeometry.setFromPoints(pointsTop)
 		rightLineGeometry.setFromPoints(pointsRight)

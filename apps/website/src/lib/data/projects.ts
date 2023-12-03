@@ -1,5 +1,7 @@
+export type ProjectType = 'info' | 'work'
+
 export interface Project {
-	type: 'initial' | 'info' | 'work'
+	type: ProjectType
 	title: string
 	slug: string
 	url?: string
@@ -13,7 +15,7 @@ export interface Project {
 }
 
 export const home: Project = {
-	type: 'initial',
+	type: 'work',
 	title: 'Laird Kruger',
 	slug: '/',
 	url: '/',

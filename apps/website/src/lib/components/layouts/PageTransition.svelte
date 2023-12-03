@@ -7,8 +7,6 @@
 
 	const pageContext = createPageContext(pathname)
 
-	console.log('pageContext', pageContext, pathname)
-
 	function transition(
 		_: HTMLDivElement,
 		params: TransitionConfig,

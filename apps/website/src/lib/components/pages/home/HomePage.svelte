@@ -6,8 +6,6 @@
 	import { page } from '$app/stores'
 
 	const { isTransitioning } = getPageContext($page.url.pathname)
-
-	$: console.log($isTransitioning)
 </script>
 
 <InformationLayout>
