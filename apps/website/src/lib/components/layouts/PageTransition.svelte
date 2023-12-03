@@ -34,4 +34,7 @@
 </div>
 
 <style>
+	.page {
+		mix-blend-mode: var(--mix-blend-mode);
+	}
 </style>

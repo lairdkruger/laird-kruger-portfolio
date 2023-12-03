@@ -9,6 +9,8 @@
 	import Footer from '$lib/components/common/Footer.svelte'
 	import Navigation from '$lib/components/common/Navigation.svelte'
 	import PageTransition from '$lib/components/layouts/PageTransition.svelte'
+	import Canvas from '$lib/components/canvas/Canvas.svelte'
+	import Monoliths from '$lib/components/canvas/scenes/Monoliths.svelte'
 
 	export let data
 </script>
@@ -18,6 +20,10 @@
 	<meta name="description" content="Australia based independent web developer and designer" />
 	<meta name="creator" content="Laird Kruger" />
 </svelte:head>
+
+<Canvas>
+	<Monoliths />
+</Canvas>
 
 <Header />
 <Navigation />

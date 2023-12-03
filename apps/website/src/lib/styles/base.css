@@ -16,8 +16,8 @@ body {
 	overscroll-behavior: contain;
 	touch-action: pan-x;
 
-	background-color: var(--white);
-	color: var(--black);
+	background-color: var(--black);
+	color: var(--white);
 }
 
 /* css resets */

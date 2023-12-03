@@ -20,5 +20,7 @@
 
 		display: flex;
 		justify-content: space-between;
+
+		mix-blend-mode: var(--mix-blend-mode);
 	}
 </style>

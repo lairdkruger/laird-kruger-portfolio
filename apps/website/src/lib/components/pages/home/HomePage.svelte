@@ -1,6 +1,6 @@
 <script lang="ts">
 	import InformationLayout from '$lib/components/layouts/InformationLayout.svelte'
-	import AnimatedContent from '$lib/components/primitives/AnimatedContent.svelte'
+	import AnimatedDescription from '$lib/components/primitives/AnimatedDescription.svelte'
 	import AnimatedHeading from '$lib/components/primitives/AnimatedHeading.svelte'
 	import { getPageContext } from '$lib/contexts/page'
 	import { page } from '$app/stores'
@@ -12,9 +12,9 @@
 
 <InformationLayout>
 	<AnimatedHeading slot="heading">Laird Kruger</AnimatedHeading>
-	<AnimatedContent slot="content">
+	<AnimatedDescription slot="content">
 		<p>Creative Developer and Digital Designer</p>
-	</AnimatedContent>
+	</AnimatedDescription>
 </InformationLayout>
 
 <style>

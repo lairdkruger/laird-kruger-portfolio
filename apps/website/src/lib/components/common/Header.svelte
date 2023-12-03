@@ -10,5 +10,7 @@
 		position: fixed;
 		top: var(--margin);
 		left: var(--margin);
+
+		mix-blend-mode: var(--mix-blend-mode);
 	}
 </style>
