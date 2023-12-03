@@ -10,5 +10,15 @@
 	xmlns="http://www.w3.org/2000/svg"
 	overflow="visible"
 >
-	<rect width="16" height="37" stroke="currentColor" fill={isActive ? '#000000' : 'transparent'} />
+	<rect width="16" height="37" stroke="currentColor" class:active={isActive} />
 </svg>
+
+<style>
+	rect {
+		fill: transparent;
+	}
+
+	rect.active {
+		fill: var(--white);
+	}
+</style>

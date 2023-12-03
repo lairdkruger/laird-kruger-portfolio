@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation'
 	import { getWebglContext } from '$lib/contexts/webgl'
 	import type { Project } from '$lib/data/projects'
-	import { impulseForce } from '$lib/stores/physics'
+	import { activeMass, defaultMass, impulseForce, slabSize } from '$lib/stores/physics'
 	import { activeProject, activeProjectPosition } from '$lib/stores/projects'
 	import type { RigidBody } from '@dimforge/rapier3d'
 	import { onDestroy } from 'svelte'
@@ -26,8 +26,7 @@
 
 	const { rapier, rapierWorld, onFrame, raycaster, onClick } = getWebglContext()
 
-	const size = [1, 2.33, 0.1]
-	const geometry = new BoxGeometry(...size)
+	const geometry = new BoxGeometry(...slabSize)
 	const material = new MeshBasicMaterial({ transparent: false })
 	const mesh = new Mesh(geometry, material)
 	mesh.position.set(position.x, position.y, position.z)
@@ -71,11 +70,16 @@
 		const rigidBodyDesc = $rapier.RigidBodyDesc.dynamic()
 			.setTranslation(position.x, position.y, position.z)
 			.setRotation(rotationQuaternion)
-			.setAdditionalMass(10)
+			.setAdditionalMass(defaultMass)
+			.setCanSleep(false)
 
 		physicsBody = $rapierWorld.createRigidBody(rigidBodyDesc)
 
-		const colliderDesc = $rapier.ColliderDesc.cuboid(size[0] / 2, size[1] / 2, size[2] / 2)
+		const colliderDesc = $rapier.ColliderDesc.cuboid(
+			slabSize[0] / 2,
+			slabSize[1] / 2,
+			slabSize[2] / 2
+		)
 			.setFriction(0)
 			.setRestitution(1)
 
@@ -90,10 +94,16 @@
 			$raycaster.intersectObject(mesh, false)[0].object.uuid === mesh.uuid
 		) {
 			activeProject.set(project.slug)
-			physicsBody?.applyImpulse({ x: 0, y: 0, z: -impulseForce }, true)
 			goto(`/projects/${project.slug}`)
 		}
 	})
+
+	$: if (isActiveProject && $rapierWorld) {
+		physicsBody?.applyImpulse({ x: 0, y: 0, z: -impulseForce }, true)
+		physicsBody?.setAdditionalMass(activeMass, true)
+	} else {
+		physicsBody?.setAdditionalMass(defaultMass, true)
+	}
 
 	onFrame(() => {
 		if ($rapier && $rapierWorld && physicsBody) {

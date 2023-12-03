@@ -30,19 +30,21 @@
 	<meta name="creator" content="Laird Kruger" />
 </svelte:head>
 
-<Canvas>
-	<Monoliths />
-</Canvas>
-
 <Header />
 <Navigation />
-<main>
-	{#key data.pathname}
-		<PageTransition pathname={data.pathname}>
-			<slot />
-		</PageTransition>
-	{/key}
-</main>
+
+<Canvas>
+	<Monoliths />
+
+	<main>
+		{#key data.pathname}
+			<PageTransition pathname={data.pathname}>
+				<slot />
+			</PageTransition>
+		{/key}
+	</main>
+</Canvas>
+
 <Footer />
 
 <style>

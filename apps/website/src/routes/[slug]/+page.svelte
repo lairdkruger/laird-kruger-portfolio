@@ -3,12 +3,22 @@
 	import { onMount } from 'svelte'
 	import type { PageData } from './$types'
 	import { pageTheme } from '$lib/stores/ui'
+	import { activeProject } from '$lib/stores/projects'
+	import { getWebglContext } from '$lib/contexts/webgl'
 
 	export let data: PageData
+
+	const { rapierWorld } = getWebglContext()
 
 	onMount(() => {
 		pageTheme.set('light')
 	})
+
+	$: if ($rapierWorld) {
+		setTimeout(() => {
+			activeProject.set(data.props.project.slug)
+		}, 0)
+	}
 </script>
 
 <ProjectPage project={data.props.project} />
