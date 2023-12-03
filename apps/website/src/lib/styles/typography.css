@@ -81,15 +81,14 @@ button:disabled {
 	opacity: 0.5;
 }
 
-.heading-large {
+.type_heading-large {
 	font-family: Anybody, Arial, Helvetica, sans-serif;
 	font-variation-settings:
 		'wdth' 150,
 		'wght' 900;
-	letter-spacing: -0.05em;
-	font-size: 7.5vw;
+	letter-spacing: -0.08em;
+	font-size: 64px;
+	line-height: 1;
 	padding: 0px;
 	text-transform: uppercase;
-	/* line-height: 1; */
-	margin-top: -0.17ch;
 }

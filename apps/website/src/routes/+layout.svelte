@@ -5,9 +5,12 @@
 	import '$lib/styles/spacing.css'
 	import '$lib/styles/typography.css'
 
-	import Header from '$lib/components/Header.svelte'
-	import Footer from '$lib/components/Footer.svelte'
-	import Navigation from '$lib/components/Navigation.svelte'
+	import Header from '$lib/components/common/Header.svelte'
+	import Footer from '$lib/components/common/Footer.svelte'
+	import Navigation from '$lib/components/common/Navigation.svelte'
+	import PageTransition from '$lib/components/layouts/PageTransition.svelte'
+
+	export let data
 </script>
 
 <svelte:head>
@@ -18,5 +21,25 @@
 
 <Header />
 <Navigation />
-<slot />
+<main>
+	{#key data.pathname}
+		<PageTransition pathname={data.pathname}>
+			<slot />
+		</PageTransition>
+	{/key}
+</main>
 <Footer />
+
+<style>
+	main {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto;
+	}
+
+	/* Prevent layout shifts on page transitions */
+	main > * {
+		grid-area: 1;
+		min-height: 100lvh;
+	}
+</style>
