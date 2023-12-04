@@ -14,6 +14,7 @@ interface WebglContext {
 	camera: Writable<PerspectiveCamera | null>
 	renderer: Writable<WebGLRenderer | null>
 	raycaster: Writable<Raycaster | null>
+	pointer: Writable<Vector2>
 	rapier: Writable<Rapier | null>
 	rapierWorld: Writable<World | null>
 	initWebgl: (canvas: HTMLCanvasElement) => void
@@ -171,6 +172,7 @@ export function createWebglContext(key?: string) {
 		camera: cameraCurrent,
 		renderer: rendererCurrent,
 		raycaster: raycasterCurrent,
+		pointer: pointerCurrent,
 		rapier: rapierCurrent,
 		rapierWorld: rapierWorldCurrent,
 		initWebgl: (canvas: HTMLCanvasElement) => init(canvas),

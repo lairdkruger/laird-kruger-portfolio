@@ -8,6 +8,7 @@
 	import ProjectSlab from '../objects/ProjectSlab.svelte'
 	import ConnectorLines from '../objects/ConnectorLines.svelte'
 	import { map } from '$lib/utils/maths'
+	import CameraMovement from '../objects/CameraMovement.svelte'
 
 	const { scene, onFrame } = getWebglContext()
 
@@ -70,3 +71,4 @@
 {/each}
 
 <ConnectorLines />
+<CameraMovement />
