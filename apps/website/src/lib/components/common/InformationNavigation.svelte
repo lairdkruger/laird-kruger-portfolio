@@ -10,7 +10,7 @@
 
 	<div class="navigation">
 		{#each information as info}
-			<NavigationMonolith route={`/${info.slug}`} />
+			<NavigationMonolith route={`/${info.slug}`} label={info.title} />
 		{/each}
 	</div>
 </div>

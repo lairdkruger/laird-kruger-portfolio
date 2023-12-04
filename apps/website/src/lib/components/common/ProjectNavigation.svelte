@@ -10,7 +10,7 @@
 
 	<div class="navigation">
 		{#each projects as project}
-			<NavigationMonolith route={`/projects/${project.slug}`} />
+			<NavigationMonolith route={`/projects/${project.slug}`} label={project.title} />
 		{/each}
 	</div>
 </div>
