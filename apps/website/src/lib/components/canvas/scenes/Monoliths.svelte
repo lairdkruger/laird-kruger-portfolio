@@ -11,7 +11,8 @@
 
 	const { scene, onFrame } = getWebglContext()
 
-	const monolithsGroup = new Group()
+	const boundsGroup = new Group()
+	const slabsGroup = new Group()
 
 	const projectSlabPositions = projects.map((_, index) => {
 		const z = map(index, 0, projects.length, -4, 1)
@@ -19,7 +20,7 @@
 	})
 
 	const projectSlabRotations = projects.map((_, index) => {
-		const randomness = index === 0 ? 0 : Math.random() * 0.05
+		const randomness = index === 0 ? 0 : Math.random() * 0
 		return new Vector3(randomness, randomness, 0)
 	})
 
@@ -29,29 +30,31 @@
 	})
 
 	const informationSlabRotations = information.map(() => {
-		const randomness = Math.random() * 0.05
+		const randomness = Math.random() * 0
 		return new Vector3(randomness, randomness, 0)
 	})
 
 	onFrame(() => {})
 
 	$: if ($scene) {
-		$scene.add(monolithsGroup)
+		$scene.add(boundsGroup)
+		$scene.add(slabsGroup)
 	}
 
 	onDestroy(() => {
 		if ($scene) {
-			$scene.remove(monolithsGroup)
+			$scene.remove(boundsGroup)
+			$scene.remove(slabsGroup)
 		}
 	})
 </script>
 
-<Bounds parent={monolithsGroup} />
+<Bounds parent={boundsGroup} />
 
 {#each projects as project, index}
 	<ProjectSlab
 		contentBlock={project}
-		parent={monolithsGroup}
+		parent={slabsGroup}
 		position={projectSlabPositions[index]}
 		rotation={projectSlabRotations[index]}
 	/>
@@ -60,7 +63,7 @@
 {#each information as info, index}
 	<InformationSlab
 		contentBlock={info}
-		parent={monolithsGroup}
+		parent={slabsGroup}
 		position={informationSlabPositions[index]}
 		rotation={informationSlabRotations[index]}
 	/>

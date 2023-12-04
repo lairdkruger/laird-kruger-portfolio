@@ -110,6 +110,21 @@ export const projects: ContentBlock[] = [
 	},
 	{
 		type: 'work',
+		title: 'Hyeja',
+		slug: 'hyeja',
+		texture: 'hyeja.webp',
+		url: 'https://www.hyejaskincare.com',
+		description: 'Custom Shopify storefront development for Hyeja Skincare → coded at 1/1\xa0Studio',
+		credits: [
+			{
+				creditText: 'Credit →',
+				linkText: '1/1 Studio',
+				link: 'https://1of1studio.com/'
+			}
+		]
+	},
+	{
+		type: 'work',
 		title: 'Zendetta',
 		slug: 'zendetta',
 		texture: 'Zendetta.webp',

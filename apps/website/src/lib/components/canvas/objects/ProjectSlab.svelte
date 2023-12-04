@@ -45,7 +45,6 @@
 	const geometry = new BoxGeometry(...slabSize)
 	const material = new MeshBasicMaterial({ transparent: true })
 	const mesh = new Mesh(geometry, material)
-	const textureLoader = new CubeTextureLoader()
 	const texture = writable<CubeTexture | null>(null)
 
 	// Edges
@@ -62,7 +61,7 @@
 
 	// Texture
 	$: if (typeof window !== 'undefined') {
-		const cubeTexture = textureLoader.load([
+		const cubeTexture = new CubeTextureLoader().load([
 			`/textures/${contentBlock.texture}`,
 			`/textures/${contentBlock.texture}`,
 			`/textures/${contentBlock.texture}`,
@@ -71,7 +70,10 @@
 			`/textures/${contentBlock.texture}`
 		])
 
-		texture.set(cubeTexture)
+		material.envMap = cubeTexture
+		material.envMap.minFilter = LinearMipMapLinearFilter
+		material.envMap.mapping = CubeReflectionMapping
+		material.needsUpdate = true
 	}
 
 	// Texture effect
@@ -81,14 +83,6 @@
 		material.opacity = 1
 	} else {
 		material.opacity = 0.4
-	}
-
-	$: if ($texture) {
-		material.envMap = $texture
-		material.envMap.anisotropy = 1
-		material.envMap.minFilter = LinearMipMapLinearFilter
-		material.envMap.mapping = CubeReflectionMapping
-		material.needsUpdate = true
 	}
 
 	// Physics
@@ -119,8 +113,8 @@
 		// On Click
 		if (
 			$raycaster &&
-			$raycaster.intersectObject(mesh, false).length > 0 &&
-			$raycaster.intersectObject(mesh, false)[0].object.uuid === mesh.uuid
+			$raycaster?.intersectObjects(parent.children, false).length > 0 &&
+			$raycaster?.intersectObjects(parent.children, false)[0].object.uuid === mesh.uuid
 		) {
 			activeProject.set(contentBlock.slug)
 			goto(`/projects/${contentBlock.slug}`)

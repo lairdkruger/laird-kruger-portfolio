@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { getWebglContext } from '$lib/contexts/webgl'
-	import { activeProjectPosition } from '$lib/stores/projects'
+	import { activeProjectPosition, activeProjectType } from '$lib/stores/projects'
+	import { pageTheme } from '$lib/stores/ui'
 	import { visibleHeightAtZDepth, visibleWidthAtZDepth } from '$lib/utils/webgl'
 	import { onDestroy } from 'svelte'
-	import { BufferGeometry, LineBasicMaterial, Vector3, Line } from 'three'
+	import { BufferGeometry, LineBasicMaterial, Vector3, Line, Color } from 'three'
 
 	const { scene, onFrame, onResize, camera } = getWebglContext()
 
@@ -42,6 +43,12 @@
 	rightLineGeometry.setFromPoints(pointsRight)
 	bottomLineGeometry.setFromPoints(pointsBottom)
 	leftLineGeometry.setFromPoints(pointsLeft)
+
+	$: if ($pageTheme === 'dark') {
+		lineMaterial.color = new Color(0xffffff)
+	} else if ($pageTheme === 'light') {
+		lineMaterial.color = new Color(0x000000)
+	}
 
 	onFrame(() => {
 		pointsTop = [$activeProjectPosition, new Vector3(0, sceneHeight / 2, 0)]

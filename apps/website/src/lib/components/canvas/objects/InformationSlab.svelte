@@ -25,7 +25,6 @@
 		Quaternion,
 		CubeTextureLoader,
 		LinearMipMapLinearFilter,
-		CubeRefractionMapping,
 		EdgesGeometry,
 		LineBasicMaterial,
 		LineSegments,
@@ -66,7 +65,6 @@
 			`/textures/${contentBlock.texture}`
 		])
 		material.envMap = cubeTexture
-		material.envMap.anisotropy = 10
 		material.envMap.minFilter = LinearMipMapLinearFilter
 		material.envMap.mapping = CubeReflectionMapping
 		material.needsUpdate = true
