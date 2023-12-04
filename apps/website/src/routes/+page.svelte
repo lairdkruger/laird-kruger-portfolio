@@ -8,4 +8,9 @@
 	})
 </script>
 
+<svelte:head>
+	<title>LAIRD KRUGER → Digital Creative</title>
+	<meta name="description" content="Australia based web developer and digital designer" />
+</svelte:head>
+
 <HomePage />

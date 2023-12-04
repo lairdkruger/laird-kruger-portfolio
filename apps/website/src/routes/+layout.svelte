@@ -47,9 +47,8 @@
 </script>
 
 <svelte:head>
-	<title>LAIRD KRUGER → Digital Creative</title>
-	<meta name="description" content="Australia based independent web developer and designer" />
 	<meta name="creator" content="Laird Kruger" />
+	<meta name="author" content="Laird Kruger" />
 </svelte:head>
 
 <Header />

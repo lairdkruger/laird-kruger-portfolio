@@ -16,6 +16,7 @@
 	import { userHasInteracted } from '$lib/stores/ui'
 	import type { RigidBody } from '@dimforge/rapier3d'
 	import { onDestroy } from 'svelte'
+	import { writable } from 'svelte/store'
 	import {
 		BoxGeometry,
 		MeshBasicMaterial,
@@ -29,7 +30,9 @@
 		CubeReflectionMapping,
 		EdgesGeometry,
 		LineBasicMaterial,
-		LineSegments
+		LineSegments,
+		Texture,
+		CubeTexture
 	} from 'three'
 
 	export let parent: Group
@@ -40,8 +43,10 @@
 	const { rapier, rapierWorld, onFrame, raycaster, onClick } = getWebglContext()
 
 	const geometry = new BoxGeometry(...slabSize)
-	const material = new MeshBasicMaterial({ transparent: false })
+	const material = new MeshBasicMaterial({ transparent: true })
 	const mesh = new Mesh(geometry, material)
+	const textureLoader = new CubeTextureLoader()
+	const texture = writable<CubeTexture | null>(null)
 
 	// Edges
 	var edgesGeometry = new EdgesGeometry(mesh.geometry) // or WireframeGeometry
@@ -57,7 +62,7 @@
 
 	// Texture
 	$: if (typeof window !== 'undefined') {
-		const cubeTexture = new CubeTextureLoader().load([
+		const cubeTexture = textureLoader.load([
 			`/textures/${contentBlock.texture}`,
 			`/textures/${contentBlock.texture}`,
 			`/textures/${contentBlock.texture}`,
@@ -65,22 +70,25 @@
 			`/textures/${contentBlock.texture}`,
 			`/textures/${contentBlock.texture}`
 		])
-		material.envMap = cubeTexture
-		material.envMap.anisotropy = 10
-		material.envMap.minFilter = LinearMipMapLinearFilter
-		material.envMap.mapping = CubeReflectionMapping
-		material.needsUpdate = true
+
+		texture.set(cubeTexture)
 	}
 
 	// Texture effect
-	$: if (material.envMap) {
-		if (isActiveProject) {
-			material.color = new Color(0xffffff)
-			material.envMap.anisotropy = 1
-		} else {
-			material.color = new Color(0x999999)
-			material.envMap.anisotropy = 10
-		}
+	$: if (isActiveProject) {
+		material.opacity = 1
+	} else if ($activeProjectType === 'info' && $userHasInteracted) {
+		material.opacity = 1
+	} else {
+		material.opacity = 0.4
+	}
+
+	$: if ($texture) {
+		material.envMap = $texture
+		material.envMap.anisotropy = 1
+		material.envMap.minFilter = LinearMipMapLinearFilter
+		material.envMap.mapping = CubeReflectionMapping
+		material.needsUpdate = true
 	}
 
 	// Physics

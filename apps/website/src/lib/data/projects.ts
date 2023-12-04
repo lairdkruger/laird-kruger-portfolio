@@ -25,19 +25,19 @@ export const home: ContentBlock = {
 export const information: ContentBlock[] = [
 	{
 		type: 'info',
-		title: 'About Me',
+		title: 'About',
 		slug: 'about',
-		texture: 'lairdkruger.webp',
+		texture: 'about.webp',
 		description:
-			'Raised in Aotearoa and now Noosa based enjoying → Surfing → Diving → Music → Movies → Roadies',
+			'Raised in Aotearoa, now Sunshine Coast based enjoying surfing, diving, music, movies and roadies',
 		credits: [
 			{
-				creditText: 'Some Music →',
+				creditText: 'Music →',
 				linkText: 'Soundcloud',
 				link: 'https://soundcloud.com/lairdkruger'
 			},
 			{
-				creditText: 'Some More Music →',
+				creditText: 'More Music →',
 				linkText: 'Spotify',
 				link: 'https://open.spotify.com/artist/2u4WHzgZEy65MlRyZNz4rg?si=P4Gy0o9cSe-3YbwZV32aAw'
 			}
@@ -49,7 +49,7 @@ export const information: ContentBlock[] = [
 		slug: 'experience',
 		texture: 'experience.webp',
 		description:
-			'2019 → BsC in Computer Science and Philosophy → 2020 → Full-stack at Psychoactive Studios → 2021 → Independent developer and designer'
+			'2019 → BsC in Computer Science and Philosophy → 2020 → Developer/Designer at Psychoactive Studios → 2021 → Independent developer and designer → 2023 → Developer at 1/1 Studio'
 	},
 	{
 		type: 'info',

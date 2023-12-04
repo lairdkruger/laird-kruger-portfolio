@@ -22,4 +22,9 @@
 	}
 </script>
 
+<svelte:head>
+	<title>LAIRD KRUGER → {data.props.project.title}</title>
+	<meta name="description" content={data.props.project.description} />
+</svelte:head>
+
 <ProjectPage contentBlock={data.props.project} />
