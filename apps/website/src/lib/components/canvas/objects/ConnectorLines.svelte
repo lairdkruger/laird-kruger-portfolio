@@ -16,8 +16,6 @@
 		sceneWidth = visibleWidthAtZDepth(0, $camera)
 	})
 
-	$: console.log('sceneHeight', sceneHeight, sceneWidth)
-
 	const topLineGeometry = new BufferGeometry()
 	const rightLineGeometry = new BufferGeometry()
 	const bottomLineGeometry = new BufferGeometry()

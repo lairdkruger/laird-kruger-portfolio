@@ -1,7 +1,13 @@
 <script lang="ts">
+	import { siteLoaded } from '$lib/stores/load'
+	import { motionDefault } from '$lib/styles/motion'
+	import { tweened } from 'svelte/motion'
+
+	const loadTimeline = tweened(0, motionDefault)
+	$: loadTimeline.set($siteLoaded ? 1 : 0)
 </script>
 
-<footer>
+<footer style="opacity: {$loadTimeline}">
 	<a href="https://github.com/lairdkruger">Github</a>
 	/
 	<a href="mailto:hello@lairdkruger.com">Contact</a>

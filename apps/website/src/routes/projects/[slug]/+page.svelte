@@ -22,4 +22,4 @@
 	}
 </script>
 
-<ProjectPage project={data.props.project} />
+<ProjectPage contentBlock={data.props.project} />

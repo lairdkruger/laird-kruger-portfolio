@@ -2,20 +2,20 @@
 	import InformationLayout from '$lib/components/layouts/InformationLayout.svelte'
 	import AnimatedDescription from '$lib/components/primitives/AnimatedDescription.svelte'
 	import AnimatedHeading from '$lib/components/primitives/AnimatedHeading.svelte'
-	import type { Project } from '$lib/data/projects'
+	import type { ContentBlock } from '$lib/data/projects'
 
-	export let project: Project
+	export let contentBlock: ContentBlock
 </script>
 
 <InformationLayout>
-	<AnimatedHeading slot="heading">{project.title}</AnimatedHeading>
+	<AnimatedHeading slot="heading">{contentBlock.title}</AnimatedHeading>
 	<AnimatedDescription slot="content">
 		<div class="description">
-			<p>{project.description}</p>
+			<p>{contentBlock.description}</p>
 
-			{#if project.credits}
+			{#if contentBlock.credits}
 				<div class="credits">
-					{#each project.credits as credit}
+					{#each contentBlock.credits as credit}
 						<span class="credit">
 							{#if credit.creditText}
 								<span>{credit.creditText}</span>
@@ -29,8 +29,8 @@
 				</div>
 			{/if}
 
-			{#if project.url}
-				<a href={project.url} target="_blank" rel="noopener noreferrer">View Project</a>
+			{#if contentBlock.url}
+				<a href={contentBlock.url} target="_blank" rel="noopener noreferrer">View Project</a>
 			{/if}
 		</div>
 	</AnimatedDescription>

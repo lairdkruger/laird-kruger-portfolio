@@ -1,6 +1,6 @@
 export type ProjectType = 'info' | 'work'
 
-export interface Project {
+export interface ContentBlock {
 	type: ProjectType
 	title: string
 	slug: string
@@ -14,7 +14,7 @@ export interface Project {
 	}[]
 }
 
-export const home: Project = {
+export const home: ContentBlock = {
 	type: 'work',
 	title: 'Laird Kruger',
 	slug: '/',
@@ -22,7 +22,7 @@ export const home: Project = {
 	description: 'Independent creative developer and digital designer'
 }
 
-export const information: Project[] = [
+export const information: ContentBlock[] = [
 	{
 		type: 'info',
 		title: 'About Me',
@@ -98,7 +98,7 @@ export const information: Project[] = [
 	}
 ]
 
-export const projects: Project[] = [
+export const projects: ContentBlock[] = [
 	{
 		type: 'work',
 		title: 'WAVEFORMS',

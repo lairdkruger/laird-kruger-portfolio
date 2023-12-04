@@ -2,7 +2,7 @@
 	import { getWebglContext } from '$lib/contexts/webgl'
 	import { onDestroy } from 'svelte'
 	import { Group, Vector3 } from 'three'
-	import BoundryBox from '../objects/BoundryBox.svelte'
+	import Bounds from '../objects/Bounds.svelte'
 	import { information, projects } from '$lib/data/projects'
 	import InformationSlab from '../objects/InformationSlab.svelte'
 	import ProjectSlab from '../objects/ProjectSlab.svelte'
@@ -14,7 +14,7 @@
 	const monolithsGroup = new Group()
 
 	const projectSlabPositions = projects.map((_, index) => {
-		const z = map(index, 0, projects.length, 2, -1)
+		const z = map(index, 0, projects.length, -4, 1)
 		return new Vector3(0, 0, z)
 	})
 
@@ -24,7 +24,7 @@
 	})
 
 	const informationSlabPositions = information.map((_, index) => {
-		const z = map(index, 0, information.length, -2, -4)
+		const z = map(index, 0, information.length, 2, 4)
 		return new Vector3(0, 0, z)
 	})
 
@@ -46,20 +46,20 @@
 	})
 </script>
 
-<BoundryBox parent={monolithsGroup} />
+<Bounds parent={monolithsGroup} />
 
 {#each projects as project, index}
 	<ProjectSlab
-		{project}
+		contentBlock={project}
 		parent={monolithsGroup}
 		position={projectSlabPositions[index]}
 		rotation={projectSlabRotations[index]}
 	/>
 {/each}
 
-{#each information as project, index}
+{#each information as info, index}
 	<InformationSlab
-		{project}
+		contentBlock={info}
 		parent={monolithsGroup}
 		position={informationSlabPositions[index]}
 		rotation={informationSlabRotations[index]}

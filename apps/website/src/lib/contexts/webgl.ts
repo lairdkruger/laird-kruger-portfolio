@@ -1,4 +1,6 @@
-import { getRapier, type Rapier } from '$lib/components/canvas/physics/rapier'
+import { getRapier, type Rapier } from '$lib/services/rapier'
+import { webglInitialized } from '$lib/stores/load'
+import { userHasInteracted } from '$lib/stores/ui'
 import type { World } from '@dimforge/rapier3d'
 import { getContext, setContext } from 'svelte'
 import { get, writable, type Writable } from 'svelte/store'
@@ -23,6 +25,8 @@ interface WebglContext {
 export function createWebglContext(key?: string) {
 	const contextKey = key || 'webgl'
 
+	// Context properties are dynamically assigned
+	// Due to the webgl initialization being an async process requiring a post-mounted canvas
 	const sceneCurrent: Writable<Scene | null> = writable(null)
 	const cameraCurrent: Writable<PerspectiveCamera | null> = writable(null)
 	const rendererCurrent: Writable<WebGLRenderer | null> = writable(null)
@@ -60,6 +64,7 @@ export function createWebglContext(key?: string) {
 	}
 
 	function handleClick() {
+		userHasInteracted.set(true)
 		for (const callback of onClickCallbacks) {
 			callback()
 		}
@@ -67,12 +72,11 @@ export function createWebglContext(key?: string) {
 
 	async function init(canvas: HTMLCanvasElement) {
 		sceneCurrent.set(new Scene())
-		cameraCurrent.set(new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 20))
+		cameraCurrent.set(new PerspectiveCamera(85, window.innerWidth / window.innerHeight, 0.1, 20))
 		rendererCurrent.set(
 			new WebGLRenderer({
-				// Most performant settings when using custom post-processing persistance
 				canvas: canvas,
-				antialias: false,
+				antialias: true,
 				alpha: false,
 				powerPreference: 'high-performance',
 				stencil: false
@@ -83,7 +87,8 @@ export function createWebglContext(key?: string) {
 		raycasterCurrent.set(new Raycaster())
 
 		const camera = get(cameraCurrent)
-		camera?.position.set(0, 0, 8)
+		camera?.position.set(0, 0, -8)
+		camera?.lookAt(0, 0, 0)
 
 		const renderer = get(rendererCurrent)
 		renderer!.setPixelRatio(window.devicePixelRatio)
@@ -114,6 +119,8 @@ export function createWebglContext(key?: string) {
 
 		handleResize()
 		loop()
+
+		webglInitialized.set(true)
 	}
 
 	function onFrame(callback: WebglFrameCallback) {

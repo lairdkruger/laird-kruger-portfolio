@@ -27,12 +27,9 @@
 	}
 </script>
 
-<div class="page" in:transition={{}} out:transition={{}}>
+<div in:transition={{}} out:transition={{}}>
 	<slot />
 </div>
 
 <style>
-	.page {
-		mix-blend-mode: var(--mix-blend-mode);
-	}
 </style>

@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { getWebglContext } from '$lib/contexts/webgl'
-	import type { Project } from '$lib/data/projects'
+	import type { ContentBlock } from '$lib/data/projects'
 	import {
 		activeMass,
+		antiGravityForce,
 		bounce,
 		defaultMass,
 		friction,
@@ -12,6 +13,7 @@
 		slabSize
 	} from '$lib/stores/physics'
 	import { activeProject, activeProjectPosition, activeProjectType } from '$lib/stores/projects'
+	import { userHasInteracted } from '$lib/stores/ui'
 	import type { RigidBody } from '@dimforge/rapier3d'
 	import { onDestroy } from 'svelte'
 	import {
@@ -24,34 +26,44 @@
 		CubeTextureLoader,
 		LinearMipMapLinearFilter,
 		Color,
-		CubeReflectionMapping
+		CubeReflectionMapping,
+		EdgesGeometry,
+		LineBasicMaterial,
+		LineSegments
 	} from 'three'
 
 	export let parent: Group
 	export let position: Vector3 = new Vector3(0, 0, 0)
 	export let rotation: Vector3 = new Vector3(0, 0, 0)
-	export let project: Project
+	export let contentBlock: ContentBlock
 
 	const { rapier, rapierWorld, onFrame, raycaster, onClick } = getWebglContext()
 
 	const geometry = new BoxGeometry(...slabSize)
 	const material = new MeshBasicMaterial({ transparent: false })
 	const mesh = new Mesh(geometry, material)
+
+	// Edges
+	var edgesGeometry = new EdgesGeometry(mesh.geometry) // or WireframeGeometry
+	var materialGeometry = new LineBasicMaterial({ color: 0xffffff })
+	var edges = new LineSegments(edgesGeometry, materialGeometry)
+	mesh.add(edges)
+
 	mesh.position.set(position.x, position.y, position.z)
 	mesh.rotation.set(rotation.x, rotation.y, rotation.z)
 	const rotationQuaternion = new Quaternion().setFromEuler(mesh.rotation)
 
-	$: isActiveProject = $activeProject === project.slug
+	$: isActiveProject = $activeProject === contentBlock.slug
 
 	// Texture
 	$: if (typeof window !== 'undefined') {
 		const cubeTexture = new CubeTextureLoader().load([
-			`/textures/${project.texture}`,
-			`/textures/${project.texture}`,
-			`/textures/${project.texture}`,
-			`/textures/${project.texture}`,
-			`/textures/${project.texture}`,
-			`/textures/${project.texture}`
+			`/textures/${contentBlock.texture}`,
+			`/textures/${contentBlock.texture}`,
+			`/textures/${contentBlock.texture}`,
+			`/textures/${contentBlock.texture}`,
+			`/textures/${contentBlock.texture}`,
+			`/textures/${contentBlock.texture}`
 		])
 		material.envMap = cubeTexture
 		material.envMap.anisotropy = 10
@@ -80,6 +92,7 @@
 			.setRotation(rotationQuaternion)
 			.setAdditionalMass(defaultMass)
 			.setCanSleep(false)
+			.setGravityScale(0)
 
 		physicsBody = $rapierWorld.createRigidBody(rigidBodyDesc)
 
@@ -101,28 +114,27 @@
 			$raycaster.intersectObject(mesh, false).length > 0 &&
 			$raycaster.intersectObject(mesh, false)[0].object.uuid === mesh.uuid
 		) {
-			activeProject.set(project.slug)
-			goto(`/projects/${project.slug}`)
+			activeProject.set(contentBlock.slug)
+			goto(`/projects/${contentBlock.slug}`)
+			physicsBody?.applyImpulse({ x: 0, y: 0, z: impulseForce }, true)
 		}
 	})
 
 	// Effects
-	$: if (isActiveProject) {
-		physicsBody?.setAdditionalMass(activeMass, true)
-		physicsBody?.applyImpulse({ x: 0, y: 0, z: -impulseForce }, true)
-	} else {
-		physicsBody?.setAdditionalMass(defaultMass, true)
-	}
+	$: if ($userHasInteracted) {
+		if ($activeProjectType === 'work') {
+			physicsBody?.setGravityScale(0, true)
+			physicsBody?.setAdditionalMass(activeMass, true)
+			physicsBody?.applyImpulse({ x: 0, y: antiGravityForce, z: 0 }, true)
 
-	$: if ($activeProjectType === 'work') {
-		physicsBody?.setGravityScale(0, true)
-		physicsBody?.setAdditionalMass(activeMass, true)
-		physicsBody?.applyImpulse({ x: 0, y: impulseForce, z: 0 }, true)
-		mesh.material.wireframe = false
-	} else {
-		physicsBody?.setGravityScale(1, true)
-		physicsBody?.setAdditionalMass(minimalMass, true)
-		mesh.material.wireframe = true
+			mesh.material.color = new Color(0xffffff)
+			mesh.material.needsUpdate = true
+		} else {
+			physicsBody?.setGravityScale(1, true)
+			physicsBody?.setAdditionalMass(minimalMass, true)
+			mesh.material.color = new Color(0x000000)
+			mesh.material.needsUpdate = true
+		}
 	}
 
 	onFrame(() => {
