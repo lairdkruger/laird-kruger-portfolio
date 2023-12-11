@@ -1,1 +1,1 @@
-Laird Kruger Portfolio Website
+SvelteKit Website

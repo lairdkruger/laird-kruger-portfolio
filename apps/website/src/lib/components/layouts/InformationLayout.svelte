@@ -6,7 +6,7 @@
 <style>
 	.wrapper {
 		position: fixed;
-		top: calc(50% - 32px);
+		top: calc(50% - 24px);
 		left: 50%;
 		transform: translate(-50%, -50%);
 

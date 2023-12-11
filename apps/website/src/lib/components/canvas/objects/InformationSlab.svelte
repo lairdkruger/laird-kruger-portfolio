@@ -14,8 +14,10 @@
 	} from '$lib/stores/physics'
 	import { activeProject, activeProjectPosition, activeProjectType } from '$lib/stores/projects'
 	import { userHasInteracted } from '$lib/stores/ui'
+	import { motionDefault } from '$lib/styles/motion'
 	import type { RigidBody } from '@dimforge/rapier3d'
 	import { onDestroy } from 'svelte'
+	import { tweened } from 'svelte/motion'
 	import {
 		BoxGeometry,
 		MeshBasicMaterial,
@@ -32,15 +34,19 @@
 		Color
 	} from 'three'
 
+	export let index: number
+	export let count: number
 	export let parent: Group
 	export let position: Vector3 = new Vector3(0, 0, 0)
 	export let rotation: Vector3 = new Vector3(0, 0, 0)
 	export let contentBlock: ContentBlock
 
+	const loadedTimeline = tweened(0, { ...motionDefault, delay: (count - index) * 70 })
+
 	const { rapier, rapierWorld, onFrame, raycaster, onClick } = getWebglContext()
 
 	const geometry = new BoxGeometry(...slabSize)
-	const material = new MeshBasicMaterial({ transparent: false })
+	const material = new MeshBasicMaterial({ transparent: true })
 	const mesh = new Mesh(geometry, material)
 
 	var edgesGeometry = new EdgesGeometry(mesh.geometry) // or WireframeGeometry
@@ -68,6 +74,17 @@
 		material.envMap.minFilter = LinearMipMapLinearFilter
 		material.envMap.mapping = CubeReflectionMapping
 		material.needsUpdate = true
+
+		loadedTimeline.set(1)
+	}
+
+	// Texture effects
+	$: if (isActiveProject) {
+		material.opacity = 1
+	} else if ($activeProjectType === 'project' && $userHasInteracted) {
+		material.opacity = 1
+	} else {
+		material.opacity = $loadedTimeline * 0.4
 	}
 
 	// Physics
@@ -109,7 +126,7 @@
 
 	// Effects
 	$: if ($userHasInteracted) {
-		if ($activeProjectType === 'info') {
+		if ($activeProjectType === 'information') {
 			physicsBody?.setGravityScale(0, true)
 			physicsBody?.setAdditionalMass(activeMass, true)
 			physicsBody?.applyImpulse({ x: 0, y: antiGravityForce, z: 0 }, true)

@@ -14,9 +14,10 @@
 	} from '$lib/stores/physics'
 	import { activeProject, activeProjectPosition, activeProjectType } from '$lib/stores/projects'
 	import { userHasInteracted } from '$lib/stores/ui'
+	import { motionDefault } from '$lib/styles/motion'
 	import type { RigidBody } from '@dimforge/rapier3d'
 	import { onDestroy } from 'svelte'
-	import { writable } from 'svelte/store'
+	import { tweened } from 'svelte/motion'
 	import {
 		BoxGeometry,
 		MeshBasicMaterial,
@@ -30,27 +31,28 @@
 		CubeReflectionMapping,
 		EdgesGeometry,
 		LineBasicMaterial,
-		LineSegments,
-		Texture,
-		CubeTexture
+		LineSegments
 	} from 'three'
 
+	export let index: number
+	export let count: number
 	export let parent: Group
 	export let position: Vector3 = new Vector3(0, 0, 0)
 	export let rotation: Vector3 = new Vector3(0, 0, 0)
 	export let contentBlock: ContentBlock
+
+	const loadedTimeline = tweened(0, { ...motionDefault, delay: (count - index) * 70 })
 
 	const { rapier, rapierWorld, onFrame, raycaster, onClick } = getWebglContext()
 
 	const geometry = new BoxGeometry(...slabSize)
 	const material = new MeshBasicMaterial({ transparent: true })
 	const mesh = new Mesh(geometry, material)
-	const texture = writable<CubeTexture | null>(null)
 
 	// Edges
-	var edgesGeometry = new EdgesGeometry(mesh.geometry) // or WireframeGeometry
-	var materialGeometry = new LineBasicMaterial({ color: 0xffffff })
-	var edges = new LineSegments(edgesGeometry, materialGeometry)
+	const edgesGeometry = new EdgesGeometry(mesh.geometry) // or WireframeGeometry
+	const materialGeometry = new LineBasicMaterial({ color: 0xffffff })
+	const edges = new LineSegments(edgesGeometry, materialGeometry)
 	mesh.add(edges)
 
 	mesh.position.set(position.x, position.y, position.z)
@@ -74,15 +76,18 @@
 		material.envMap.minFilter = LinearMipMapLinearFilter
 		material.envMap.mapping = CubeReflectionMapping
 		material.needsUpdate = true
+		loadedTimeline.set(1)
 	}
 
-	// Texture effect
+	// Texture effects
 	$: if (isActiveProject) {
 		material.opacity = 1
-	} else if ($activeProjectType === 'info' && $userHasInteracted) {
+	} else if ($activeProjectType === 'information' && $userHasInteracted) {
 		material.opacity = 1
+	} else if ($userHasInteracted) {
+		material.opacity = $loadedTimeline * 0.4
 	} else {
-		material.opacity = 0.4
+		material.opacity = $loadedTimeline * 0.75
 	}
 
 	// Physics
@@ -124,7 +129,7 @@
 
 	// Effects
 	$: if ($userHasInteracted) {
-		if ($activeProjectType === 'work') {
+		if ($activeProjectType === 'project') {
 			physicsBody?.setGravityScale(0, true)
 			physicsBody?.setAdditionalMass(activeMass, true)
 			physicsBody?.applyImpulse({ x: 0, y: antiGravityForce, z: 0 }, true)
@@ -140,6 +145,7 @@
 	}
 
 	onFrame(() => {
+		// Sync mesh to physics
 		if ($rapier && $rapierWorld && physicsBody) {
 			const position = physicsBody.translation()
 			const rotation = physicsBody.rotation()
@@ -147,6 +153,7 @@
 			mesh.position.set(position.x, position.y, position.z)
 			mesh.rotation.setFromQuaternion(new Quaternion(rotation.x, rotation.y, rotation.z, rotation.w))
 
+			// Track active project position for connector lines
 			if (isActiveProject) {
 				activeProjectPosition.set(new Vector3(position.x, position.y, position.z))
 			}

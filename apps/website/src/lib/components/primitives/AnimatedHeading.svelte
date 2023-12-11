@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pageTransitionDuration } from '$lib/stores/ui'
+	import { motionDefault } from '$lib/styles/motion'
 	import { quadOut } from 'svelte/easing'
 	import type { TransitionConfig } from 'svelte/transition'
 
@@ -13,7 +13,7 @@
 		const { position, ...rest } = params
 
 		return {
-			duration: pageTransitionDuration,
+			...motionDefault,
 			...rest,
 			css: (timeline) => {
 				const distance = options.direction === 'in' ? 24 : -24

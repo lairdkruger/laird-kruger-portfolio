@@ -15,22 +15,17 @@
 	const boundsGroup = new Group()
 	const slabsGroup = new Group()
 
-	const projectSlabPositions = projects.map((_, index) => {
-		const z = map(index, 0, projects.length, -4, 1)
+	// slabsGroup.rotateY(Math.PI / 2)
+
+	const slabs = [...projects, ...information]
+	const positionBounds = [-4, 4]
+
+	const positions = slabs.map((_, index) => {
+		const z = map(index, 0, slabs.length - 1, positionBounds[0], positionBounds[1])
 		return new Vector3(0, 0, z)
 	})
 
-	const projectSlabRotations = projects.map((_, index) => {
-		const randomness = index === 0 ? 0 : Math.random() * 0
-		return new Vector3(randomness, randomness, 0)
-	})
-
-	const informationSlabPositions = information.map((_, index) => {
-		const z = map(index, 0, information.length, 2, 4)
-		return new Vector3(0, 0, z)
-	})
-
-	const informationSlabRotations = information.map(() => {
+	const rotations = slabs.map(() => {
 		const randomness = Math.random() * 0
 		return new Vector3(randomness, randomness, 0)
 	})
@@ -52,22 +47,26 @@
 
 <Bounds parent={boundsGroup} />
 
-{#each projects as project, index}
-	<ProjectSlab
-		contentBlock={project}
-		parent={slabsGroup}
-		position={projectSlabPositions[index]}
-		rotation={projectSlabRotations[index]}
-	/>
-{/each}
-
-{#each information as info, index}
-	<InformationSlab
-		contentBlock={info}
-		parent={slabsGroup}
-		position={informationSlabPositions[index]}
-		rotation={informationSlabRotations[index]}
-	/>
+{#each slabs as slab, index}
+	{#if slab.type == 'information'}
+		<InformationSlab
+			{index}
+			count={slabs.length}
+			contentBlock={slab}
+			parent={slabsGroup}
+			position={positions[index]}
+			rotation={rotations[index]}
+		/>
+	{:else}
+		<ProjectSlab
+			{index}
+			count={slabs.length}
+			contentBlock={slab}
+			parent={slabsGroup}
+			position={positions[index]}
+			rotation={rotations[index]}
+		/>
+	{/if}
 {/each}
 
 <ConnectorLines />

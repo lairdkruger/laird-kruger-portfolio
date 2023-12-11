@@ -1,4 +1,4 @@
-export type ProjectType = 'info' | 'work'
+export type ProjectType = 'information' | 'project' | 'textOnly'
 
 export interface ContentBlock {
 	type: ProjectType
@@ -15,16 +15,16 @@ export interface ContentBlock {
 }
 
 export const home: ContentBlock = {
-	type: 'work',
+	type: 'textOnly',
 	title: 'Laird Kruger',
 	slug: '/',
 	url: '/',
-	description: 'Independent creative developer and digital designer'
+	description: 'Creative developer and digital designer'
 }
 
 export const information: ContentBlock[] = [
 	{
-		type: 'info',
+		type: 'information',
 		title: 'About',
 		slug: 'about',
 		texture: 'about.webp',
@@ -44,7 +44,7 @@ export const information: ContentBlock[] = [
 		]
 	},
 	{
-		type: 'info',
+		type: 'information',
 		title: 'Experience',
 		slug: 'experience',
 		texture: 'experience.webp',
@@ -52,13 +52,21 @@ export const information: ContentBlock[] = [
 			'2019 → BsC in Computer Science and Philosophy → 2020 → Developer/Designer at Psychoactive Studios → 2021 → Independent developer and designer → 2023 → Developer at 1/1 Studio'
 	},
 	{
-		type: 'info',
+		type: 'information',
 		title: 'Technologies',
 		slug: 'technologies',
 		texture: 'technologies.webp',
 		description:
-			'My go-to tools to create everything from simple portfolio websites to interactive 3D experiences and fully customised ecommerce storefronts:',
+			'Tools I use to create everything from simple portfolio websites to interactive 3D experiences and custom ecommerce storefronts:',
 		credits: [
+			{
+				linkText: 'Svelte',
+				link: 'https://svelte.dev/'
+			},
+			{
+				linkText: 'SvelteKit',
+				link: 'https://kit.svelte.dev/'
+			},
 			{
 				linkText: 'React',
 				link: 'https://reactjs.org'
@@ -84,10 +92,6 @@ export const information: ContentBlock[] = [
 				link: 'https://sass-lang.com'
 			},
 			{
-				linkText: 'React Three Fiber',
-				link: 'https://docs.pmnd.rs/react-three-fiber/getting-started/examples'
-			},
-			{
 				linkText: 'Web Audio API',
 				link: 'https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API'
 			},
@@ -100,16 +104,16 @@ export const information: ContentBlock[] = [
 
 export const projects: ContentBlock[] = [
 	{
-		type: 'work',
+		type: 'project',
 		title: 'WAVEFORMS',
 		slug: 'waveforms',
 		texture: 'waveforms.webp',
 		url: 'https://www.waveforms.app',
 		description:
-			'Concept + design + development of WAVEFORMS App → a collection of realtime web-based audio reactive visualizers'
+			'Concept + design + development of WAVEFORMS App → a collection of customisable realtime audio visualizers'
 	},
 	{
-		type: 'work',
+		type: 'project',
 		title: 'Hyeja',
 		slug: 'hyeja',
 		texture: 'hyeja.webp',
@@ -124,7 +128,7 @@ export const projects: ContentBlock[] = [
 		]
 	},
 	{
-		type: 'work',
+		type: 'project',
 		title: 'Zendetta',
 		slug: 'zendetta',
 		texture: 'Zendetta.webp',
@@ -160,16 +164,22 @@ export const projects: ContentBlock[] = [
 		]
 	},
 	{
-		type: 'work',
-		title: 'Otherside',
-		slug: 'otherside',
-		texture: 'Template.webp',
-		url: 'https://www.otherside.directory/',
-		description:
-			'Showcase of the development template used by Otherside Directory → a concept collective'
+		type: 'project',
+		title: '1/1 Portfolio',
+		slug: '1of1portfolio',
+		texture: '1of1portfolio.webp',
+		url: 'https://1of1studio.com',
+		description: 'Portfolio website for 1/1 studio → coded while working at 1/1\xa0Studio',
+		credits: [
+			{
+				creditText: 'Credit →',
+				linkText: '1/1 Studio',
+				link: 'https://1of1studio.com/'
+			}
+		]
 	},
 	{
-		type: 'work',
+		type: 'project',
 		title: 'Embryonic',
 		slug: 'embryonic',
 		texture: 'Embryonic.webp',
@@ -178,7 +188,7 @@ export const projects: ContentBlock[] = [
 			'Blockchain NFT minting site for ARTHAUS project + Creation of template respository for future blockchain/NFT projects'
 	},
 	{
-		type: 'work',
+		type: 'project',
 		title: 'Studio S II',
 		slug: 'studio-s-ii',
 		texture: 'StudioSII.webp',
@@ -199,8 +209,17 @@ export const projects: ContentBlock[] = [
 			}
 		]
 	},
+	// {
+	// 	type: 'project',
+	// 	title: 'Otherside',
+	// 	slug: 'otherside',
+	// 	texture: 'Template.webp',
+	// 	url: 'https://www.otherside.directory/',
+	// 	description:
+	// 		'Showcase of the development template used by Otherside Directory → a concept collective'
+	// },
 	{
-		type: 'work',
+		type: 'project',
 		title: '0xigami',
 		slug: 'oxigami',
 		texture: '0xigami.webp',
@@ -208,34 +227,34 @@ export const projects: ContentBlock[] = [
 		description: 'Brand identity and guidelines for sci-fi blockchain project'
 	},
 	{
-		type: 'work',
+		type: 'project',
 		title: 'Gallery',
 		slug: 'gallery',
 		texture: 'KieransGallery.webp',
 		url: 'https://www.kierankruger.photography',
-		description: "Gallery site for Kieran Kruger's photography"
-	},
-	{
-		type: 'work',
-		title: 'Newfoundland',
-		slug: 'newfoundland',
-		texture: 'Newfoundland_001.webp',
-		url: 'https://newfoundland.studio',
-		description: 'Experimental case study website created for pseudostudio newfoundland'
-	},
-	{
-		type: 'work',
-		title: 'Lotties Study',
-		slug: 'lotties-study',
-		texture: 'Lotties.webp',
-		url: 'https://lottie-demonstration.webflow.io/',
-		description: 'Educational document exploring some advanced uses of the Lottie animation format',
-		credits: [
-			{
-				creditText: 'Referenced By →',
-				linkText: 'Create Lottie Layer',
-				link: 'https://github.com/samcraigdev/create-lottie-layer'
-			}
-		]
+		description: "Gallery concept site featuring my brother's photography"
 	}
+	// {
+	// 	type: 'project',
+	// 	title: 'Newfoundland',
+	// 	slug: 'newfoundland',
+	// 	texture: 'Newfoundland_001.webp',
+	// 	url: 'https://newfoundland.studio',
+	// 	description: 'Experimental case study website created for pseudostudio newfoundland'
+	// }
+	// {
+	// 	type: 'project',
+	// 	title: 'Lotties Study',
+	// 	slug: 'lotties-study',
+	// 	texture: 'Lotties.webp',
+	// 	url: 'https://lottie-demonstration.webflow.io/',
+	// 	description: 'Educational document exploring some advanced uses of the Lottie animation format',
+	// 	credits: [
+	// 		{
+	// 			creditText: 'Referenced By →',
+	// 			linkText: 'Create Lottie Layer',
+	// 			link: 'https://github.com/samcraigdev/create-lottie-layer'
+	// 		}
+	// 	]
+	// }
 ]

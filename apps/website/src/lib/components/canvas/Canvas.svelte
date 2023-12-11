@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { createWebglContext } from '$lib/contexts/webgl'
+	import { tweened } from 'svelte/motion'
+	import { motionDefault } from '$lib/styles/motion'
+	import { siteLoaded } from '$lib/stores/load'
 
 	// References
 	let canvas: HTMLCanvasElement
@@ -11,9 +14,12 @@
 	onMount(() => {
 		initWebgl(canvas)
 	})
+
+	const loadTimeline = tweened(0, { ...motionDefault, delay: 0 })
+	$: loadTimeline.set($siteLoaded ? 1 : 0)
 </script>
 
-<canvas class="canvas" bind:this={canvas} />
+<canvas class="canvas" bind:this={canvas} style="opacity: {$loadTimeline}" />
 <slot />
 
 <style>
