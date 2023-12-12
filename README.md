@@ -22,4 +22,4 @@ This means that Svelte essentially sits at the same level as the real DOM (no vi
 Typescript is used to maintain static type checking throughout the application. The only reason typescript is used over javascript (with JSDoc for typings) is that typescript files are generally more readable and concise to write.
 
 The SvelteKit application framework is used to enable SPA behaviour while maintaining server-side rendering and standard routing for SEO.
-Modern CSS is powerful enough for all styling requirements.
+No CSS preprocessors are used as Modern CSS is powerful enough for all styling requirements, with dynamic variables, container queries etc.
