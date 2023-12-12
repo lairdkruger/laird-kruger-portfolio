@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { siteLoaded } from '$lib/stores/load'
+	import { siteLoaded } from '$lib/stores/loading'
 	import { motionDefault } from '$lib/styles/motion'
 	import { tweened } from 'svelte/motion'
 
@@ -8,7 +8,7 @@
 </script>
 
 <footer style="opacity: {$loadTimeline}">
-	<a href="https://github.com/lairdkruger">Github</a>
+	<a href="https://github.com/lairdkruger" target="_blank" rel="noopener noreferrer">Github</a>
 	/
 	<a href="mailto:hello@lairdkruger.com">Contact</a>
 </footer>

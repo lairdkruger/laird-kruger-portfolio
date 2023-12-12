@@ -2,23 +2,23 @@
 	import { getWebglContext } from '$lib/contexts/webgl'
 	import { onDestroy } from 'svelte'
 	import { Group, Vector3 } from 'three'
-	import Bounds from '../objects/Bounds.svelte'
-	import { information, projects } from '$lib/data/projects'
-	import InformationSlab from '../objects/InformationSlab.svelte'
-	import ProjectSlab from '../objects/ProjectSlab.svelte'
-	import ConnectorLines from '../objects/ConnectorLines.svelte'
-	import { map } from '$lib/utils/maths'
-	import CameraMovement from '../objects/CameraMovement.svelte'
+	import Bounds from '$lib/components/canvas/objects/Bounds.svelte'
+	import { information, projects } from '$lib/data/blocks'
+	import InformationSlab from '$lib/components/canvas/objects/InformationSlab.svelte'
+	import ProjectSlab from '$lib/components/canvas/objects/ProjectSlab.svelte'
+	import ConnectorLines from '$lib/components/canvas/objects/ConnectorLines.svelte'
+	import CameraMovement from '$lib/components/canvas/objects/CameraMovement.svelte'
+	import { map } from 'maths-utils'
 
 	const { scene, onFrame } = getWebglContext()
 
 	const boundsGroup = new Group()
 	const slabsGroup = new Group()
 
-	// slabsGroup.rotateY(Math.PI / 2)
+	const sceneSize = new Vector3(10, 10, 10)
 
 	const slabs = [...projects, ...information]
-	const positionBounds = [-4, 4]
+	const positionBounds = [-(sceneSize.y / 2 - 1), sceneSize.y / 2 - 1]
 
 	const positions = slabs.map((_, index) => {
 		const z = map(index, 0, slabs.length - 1, positionBounds[0], positionBounds[1])
@@ -45,7 +45,7 @@
 	})
 </script>
 
-<Bounds parent={boundsGroup} />
+<Bounds parent={boundsGroup} size={sceneSize} />
 
 {#each slabs as slab, index}
 	{#if slab.type == 'information'}

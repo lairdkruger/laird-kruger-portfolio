@@ -1,4 +1,4 @@
-import type { ProjectType } from '$lib/data/projects'
+import type { ProjectType } from '$lib/data/blocks'
 import { writable } from 'svelte/store'
 import { Vector3 } from 'three'
 

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { getWebglContext } from '$lib/contexts/webgl'
-	import { activeProjectPosition, activeProjectType } from '$lib/stores/projects'
+	import { activeProjectPosition } from '$lib/stores/projects'
 	import { pageTheme } from '$lib/stores/ui'
-	import { visibleHeightAtZDepth, visibleWidthAtZDepth } from '$lib/utils/webgl'
 	import { onDestroy } from 'svelte'
 	import { BufferGeometry, LineBasicMaterial, Vector3, Line, Color } from 'three'
+	import { visibleHeightAtZDepth, visibleWidthAtZDepth } from 'three-utils'
 
 	const { scene, onFrame, onResize, camera } = getWebglContext()
 
@@ -63,10 +63,10 @@
 	})
 
 	$: if ($scene) {
-		$scene.add(topLine)
-		$scene.add(rightLine)
-		$scene.add(bottomLine)
-		$scene.add(leftLine)
+		if (!$scene.children.includes(topLine)) $scene.add(topLine)
+		if (!$scene.children.includes(rightLine)) $scene.add(rightLine)
+		if (!$scene.children.includes(bottomLine)) $scene.add(bottomLine)
+		if (!$scene.children.includes(leftLine)) $scene.add(leftLine)
 	}
 
 	onDestroy(() => {

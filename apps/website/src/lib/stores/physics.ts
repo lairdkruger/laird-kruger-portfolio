@@ -1,5 +1,6 @@
 const slabDimensions = [1, 2.33, 0.1]
 const slabScale = 2
+
 export const slabSize = [
 	slabDimensions[0] * slabScale,
 	slabDimensions[1] * slabScale,

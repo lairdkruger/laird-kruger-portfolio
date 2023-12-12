@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { tweened } from 'svelte/motion'
 	import InformationNavigation from './InformationNavigation.svelte'
-	import ProjectNavigation from './ProjectNavigation.svelte'
 	import { motionDefault } from '$lib/styles/motion'
-	import { siteLoaded } from '$lib/stores/load'
+	import { siteLoaded } from '$lib/stores/loading'
+	import ProjectNavigation from './ProjectNavigation.svelte'
 
 	const loadTimeline = tweened(0, motionDefault)
 	$: loadTimeline.set($siteLoaded ? 1 : 0)

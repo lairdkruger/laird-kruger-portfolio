@@ -1,7 +1,7 @@
-import { getRapier, type Rapier } from '$lib/services/rapier'
-import { webglInitialized } from '$lib/stores/load'
+import { webglInitialized } from '$lib/stores/loading'
 import { userHasInteracted } from '$lib/stores/ui'
-import type { World } from '@dimforge/rapier3d'
+import RAPIER from '@dimforge/rapier3d-compat'
+import type { World } from '@dimforge/rapier3d-compat'
 import { getContext, setContext } from 'svelte'
 import { get, writable, type Writable } from 'svelte/store'
 import { WebGLRenderer, PerspectiveCamera, Scene, Vector2, Clock, Raycaster } from 'three'
@@ -15,7 +15,6 @@ interface WebglContext {
 	renderer: Writable<WebGLRenderer | null>
 	raycaster: Writable<Raycaster | null>
 	pointer: Writable<Vector2>
-	rapier: Writable<Rapier | null>
 	rapierWorld: Writable<World | null>
 	initWebgl: (canvas: HTMLCanvasElement) => void
 	onClick: (callback: EventCallback) => void
@@ -35,7 +34,6 @@ export function createWebglContext(key?: string) {
 	const pointerCurrent: Writable<Vector2> = writable<Vector2>(new Vector2(0, 0))
 	const raycasterCurrent: Writable<Raycaster | null> = writable(null)
 
-	const rapierCurrent: Writable<Rapier | null> = writable(null)
 	const rapierWorldCurrent: Writable<World | null> = writable(null)
 
 	const onFrameCallbacks: WebglFrameCallback[] = []
@@ -100,11 +98,9 @@ export function createWebglContext(key?: string) {
 		renderer!.getSize(size)
 
 		// Physics
-		const rapierInstance = await getRapier()
-		rapierCurrent.set(rapierInstance)
-		const rapier = get(rapierCurrent)!
+		await RAPIER.init()
 
-		const world = new rapier.World({ x: 0.0, y: -9.81, z: 0.0 })
+		const world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 })
 		rapierWorldCurrent.set(world)
 
 		// Events
@@ -174,7 +170,6 @@ export function createWebglContext(key?: string) {
 		renderer: rendererCurrent,
 		raycaster: raycasterCurrent,
 		pointer: pointerCurrent,
-		rapier: rapierCurrent,
 		rapierWorld: rapierWorldCurrent,
 		initWebgl: (canvas: HTMLCanvasElement) => init(canvas),
 		onClick: onClick,

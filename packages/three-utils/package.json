@@ -1,0 +1,11 @@
+{
+	"name": "three-utils",
+	"version": "0.0.0",
+	"main": "index.ts",
+	"devDependencies": {
+		"@types/three": "^0.159.0"
+	},
+	"dependencies": {
+		"three": "^0.159.0"
+	}
+}

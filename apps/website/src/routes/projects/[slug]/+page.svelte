@@ -15,10 +15,8 @@
 	})
 
 	$: if ($rapierWorld) {
-		setTimeout(() => {
-			activeProject.set(data.props.project.slug)
-			activeProjectType.set(data.props.project.type)
-		}, 0)
+		activeProject.set(data.props.project.slug)
+		activeProjectType.set(data.props.project.type)
 	}
 </script>
 

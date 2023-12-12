@@ -5,16 +5,15 @@
 	import '$lib/styles/spacing.css'
 	import '$lib/styles/typography.css'
 
-	import Header from '$lib/components/common/Header.svelte'
-	import Footer from '$lib/components/common/Footer.svelte'
-	import Navigation from '$lib/components/common/Navigation.svelte'
-	import PageTransition from '$lib/components/layouts/PageTransition.svelte'
+	import Header from '$lib/components/common/header/Header.svelte'
+	import Footer from '$lib/components/common/footer/Footer.svelte'
+	import Navigation from '$lib/components/common/navigation/Navigation.svelte'
 	import Canvas from '$lib/components/canvas/Canvas.svelte'
 	import Monoliths from '$lib/components/canvas/scenes/Monoliths.svelte'
-	import { pageTheme, userHasInteracted } from '$lib/stores/ui.js'
-	import { siteLoaded, svelteInitialized } from '$lib/stores/load.js'
+	import { pageTheme, userHasInteracted } from '$lib/stores/ui'
+	import { siteLoaded, svelteInitialized } from '$lib/stores/loading'
 	import { tweened } from 'svelte/motion'
-	import { motionDefault } from '$lib/styles/motion.js'
+	import { motionDefault } from '$lib/styles/motion'
 	import { onDestroy, onMount } from 'svelte'
 
 	export let data
@@ -58,10 +57,9 @@
 	<Monoliths />
 
 	<main style="opacity: {$loadTimeline}">
+		<!-- Keying enables component transitions -->
 		{#key data.pathname}
-			<PageTransition pathname={data.pathname}>
-				<slot />
-			</PageTransition>
+			<slot />
 		{/key}
 	</main>
 </Canvas>
@@ -70,15 +68,6 @@
 
 <style>
 	main {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: auto;
 		mix-blend-mode: difference;
-	}
-
-	/* Prevent layout shifts on page transitions */
-	main > * {
-		grid-area: 1;
-		min-height: 100lvh;
 	}
 </style>

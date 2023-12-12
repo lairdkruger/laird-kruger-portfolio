@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { siteLoaded } from '$lib/stores/load'
+	import { siteLoaded } from '$lib/stores/loading'
 	import { motionDefault } from '$lib/styles/motion'
 	import { tweened } from 'svelte/motion'
 

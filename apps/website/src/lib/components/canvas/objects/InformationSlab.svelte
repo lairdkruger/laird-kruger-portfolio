@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { getWebglContext } from '$lib/contexts/webgl'
-	import type { ContentBlock } from '$lib/data/projects'
+	import type { ContentBlock } from '$lib/data/blocks'
 	import {
 		activeMass,
 		antiGravityForce,
@@ -15,7 +15,8 @@
 	import { activeProject, activeProjectPosition, activeProjectType } from '$lib/stores/projects'
 	import { userHasInteracted } from '$lib/stores/ui'
 	import { motionDefault } from '$lib/styles/motion'
-	import type { RigidBody } from '@dimforge/rapier3d'
+	import type { RigidBody } from '@dimforge/rapier3d-compat'
+	import RAPIER from '@dimforge/rapier3d-compat'
 	import { onDestroy } from 'svelte'
 	import { tweened } from 'svelte/motion'
 	import {
@@ -43,7 +44,7 @@
 
 	const loadedTimeline = tweened(0, { ...motionDefault, delay: (count - index) * 70 })
 
-	const { rapier, rapierWorld, onFrame, raycaster, onClick } = getWebglContext()
+	const { rapierWorld, onFrame, raycaster, onClick } = getWebglContext()
 
 	const geometry = new BoxGeometry(...slabSize)
 	const material = new MeshBasicMaterial({ transparent: true })
@@ -90,8 +91,8 @@
 	// Physics
 	let physicsBody: RigidBody | null = null
 
-	$: if ($rapier && $rapierWorld) {
-		const rigidBodyDesc = $rapier.RigidBodyDesc.dynamic()
+	$: if ($rapierWorld) {
+		const rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
 			.setTranslation(position.x, position.y, position.z)
 			.setRotation(rotationQuaternion)
 			.setAdditionalMass(defaultMass)
@@ -100,11 +101,7 @@
 
 		physicsBody = $rapierWorld.createRigidBody(rigidBodyDesc)
 
-		const colliderDesc = $rapier.ColliderDesc.cuboid(
-			slabSize[0] / 2,
-			slabSize[1] / 2,
-			slabSize[2] / 2
-		)
+		const colliderDesc = RAPIER.ColliderDesc.cuboid(slabSize[0] / 2, slabSize[1] / 2, slabSize[2] / 2)
 			.setFriction(friction)
 			.setRestitution(bounce)
 
@@ -142,7 +139,7 @@
 	}
 
 	onFrame(() => {
-		if ($rapier && $rapierWorld && physicsBody) {
+		if ($rapierWorld && physicsBody) {
 			const position = physicsBody.translation()
 			const rotation = physicsBody.rotation()
 
@@ -156,7 +153,7 @@
 	})
 
 	$: if (parent) {
-		parent.add(mesh)
+		if (!parent.children.includes(mesh)) parent.add(mesh)
 	}
 
 	onDestroy(() => {

@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit'
 import type { PageLoad } from './$types'
-import { projects } from '$lib/data/projects'
+import { projects } from '$lib/data/blocks'
 
 export const load: PageLoad = ({ params }) => {
 	const project = projects.find((project) => project.slug === params.slug)

@@ -3,7 +3,7 @@
 	import { createWebglContext } from '$lib/contexts/webgl'
 	import { tweened } from 'svelte/motion'
 	import { motionDefault } from '$lib/styles/motion'
-	import { siteLoaded } from '$lib/stores/load'
+	import { siteLoaded } from '$lib/stores/loading'
 
 	// References
 	let canvas: HTMLCanvasElement

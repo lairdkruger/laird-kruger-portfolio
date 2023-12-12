@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { getWebglContext } from '$lib/contexts/webgl'
 	import { pageTheme } from '$lib/stores/ui'
-	import type { RigidBody } from '@dimforge/rapier3d'
+	import type { RigidBody } from '@dimforge/rapier3d-compat'
+	import RAPIER from '@dimforge/rapier3d-compat'
 	import { onDestroy } from 'svelte'
-	import { BoxGeometry, MeshBasicMaterial, type Group, Mesh, Color, BackSide } from 'three'
+	import { BoxGeometry, MeshBasicMaterial, type Group, Mesh, Color, BackSide, Vector3 } from 'three'
 
 	export let parent: Group
+	export let size: Vector3
 
-	const { rapier, rapierWorld } = getWebglContext()
-
-	const size = [10, 10, 10]
+	const { rapierWorld } = getWebglContext()
 
 	const geometry = new BoxGeometry(...size)
 	const materialColor = new Color(0xffffff)
@@ -31,83 +31,79 @@
 
 	const friction = 0
 
-	$: if ($rapier && $rapierWorld) {
+	$: if ($rapierWorld) {
 		const wallThickness = 0.1
 
 		// Floor
-		const floorRigidBodyDesc = $rapier.RigidBodyDesc.fixed()
-			.setTranslation(0, -size[1] / 2, 0)
+		const floorRigidBodyDesc = RAPIER.RigidBodyDesc.fixed()
+			.setTranslation(0, -size.y / 2, 0)
 			.setCanSleep(false)
 			.setCcdEnabled(true)
 		floorPhysicsBody = $rapierWorld.createRigidBody(floorRigidBodyDesc)
-		const floorColliderDesc = $rapier.ColliderDesc.cuboid(
-			size[0],
-			wallThickness,
-			size[2]
-		).setFriction(friction)
+		const floorColliderDesc = RAPIER.ColliderDesc.cuboid(size.x, wallThickness, size.z).setFriction(
+			friction
+		)
 		$rapierWorld.createCollider(floorColliderDesc, floorPhysicsBody)
 
 		// Ceiling
-		const ceilingRigidBodyDesc = $rapier.RigidBodyDesc.fixed()
-			.setTranslation(0, size[1] / 2, 0)
+		const ceilingRigidBodyDesc = RAPIER.RigidBodyDesc.fixed()
+			.setTranslation(0, size.y / 2, 0)
 			.setCanSleep(false)
 			.setCcdEnabled(true)
 		ceilingPhysicsBody = $rapierWorld.createRigidBody(ceilingRigidBodyDesc)
-		const ceilingColliderDesc = $rapier.ColliderDesc.cuboid(
-			size[0],
-			wallThickness,
-			size[2]
-		).setFriction(friction)
+		const ceilingColliderDesc = RAPIER.ColliderDesc.cuboid(size.x, wallThickness, size.z).setFriction(
+			friction
+		)
 		$rapierWorld.createCollider(ceilingColliderDesc, ceilingPhysicsBody)
 
 		// Left Wall
-		const leftWallRigidBodyDesc = $rapier.RigidBodyDesc.fixed()
-			.setTranslation(-size[0] / 2, 0, 0)
+		const leftWallRigidBodyDesc = RAPIER.RigidBodyDesc.fixed()
+			.setTranslation(-size.x / 2, 0, 0)
 			.setCanSleep(false)
 			.setCcdEnabled(true)
 		leftWallPhysicsBody = $rapierWorld.createRigidBody(leftWallRigidBodyDesc)
-		const leftWallColliderDesc = $rapier.ColliderDesc.cuboid(
+		const leftWallColliderDesc = RAPIER.ColliderDesc.cuboid(
 			wallThickness,
-			size[1],
-			size[2]
+			size.y,
+			size.z
 		).setFriction(friction)
 		$rapierWorld.createCollider(leftWallColliderDesc, leftWallPhysicsBody)
 
 		// Right Wall
-		const rightWallRigidBodyDesc = $rapier.RigidBodyDesc.fixed()
-			.setTranslation(size[0] / 2, 0, 0)
+		const rightWallRigidBodyDesc = RAPIER.RigidBodyDesc.fixed()
+			.setTranslation(size.x / 2, 0, 0)
 			.setCanSleep(false)
 			.setCcdEnabled(true)
 		rightWallPhysicsBody = $rapierWorld.createRigidBody(rightWallRigidBodyDesc)
-		const rightWallColliderDesc = $rapier.ColliderDesc.cuboid(
+		const rightWallColliderDesc = RAPIER.ColliderDesc.cuboid(
 			wallThickness,
-			size[1],
-			size[2]
+			size.y,
+			size.z
 		).setFriction(friction)
 		$rapierWorld.createCollider(rightWallColliderDesc, rightWallPhysicsBody)
 
 		// Front Wall
-		const frontWallRigidBodyDesc = $rapier.RigidBodyDesc.fixed()
-			.setTranslation(0, 0, -size[2] / 2)
+		const frontWallRigidBodyDesc = RAPIER.RigidBodyDesc.fixed()
+			.setTranslation(0, 0, -size.z / 2)
 			.setCanSleep(false)
 			.setCcdEnabled(true)
 		frontWallPhysicsBody = $rapierWorld.createRigidBody(frontWallRigidBodyDesc)
-		const frontWallColliderDesc = $rapier.ColliderDesc.cuboid(
-			size[0],
-			size[1],
+		const frontWallColliderDesc = RAPIER.ColliderDesc.cuboid(
+			size.x,
+			size.y,
 			wallThickness
 		).setFriction(friction)
 		$rapierWorld.createCollider(frontWallColliderDesc, frontWallPhysicsBody)
 
 		// Back Wall
-		const backWallRigidBodyDesc = $rapier.RigidBodyDesc.fixed()
-			.setTranslation(0, 0, size[2] / 2)
+		const backWallRigidBodyDesc = RAPIER.RigidBodyDesc.fixed()
+			.setTranslation(0, 0, size.z / 2)
 			.setCanSleep(false)
 			.setCcdEnabled(true)
 		backWallPhysicsBody = $rapierWorld.createRigidBody(backWallRigidBodyDesc)
-		const backWallColliderDesc = $rapier.ColliderDesc.cuboid(
-			size[0],
-			size[1],
+		const backWallColliderDesc = RAPIER.ColliderDesc.cuboid(
+			size.x,
+			size.y,
 			wallThickness
 		).setFriction(friction)
 		$rapierWorld.createCollider(backWallColliderDesc, backWallPhysicsBody)
@@ -122,7 +118,7 @@
 	}
 
 	$: if (parent) {
-		parent.add(mesh)
+		if (!parent.children.includes(mesh)) parent.add(mesh)
 	}
 
 	onDestroy(() => {

@@ -1,9 +1,7 @@
 <script lang="ts">
 	import InformationLayout from '$lib/components/layouts/InformationLayout.svelte'
-	import AnimatedDescription from '$lib/components/primitives/AnimatedDescription.svelte'
-	import AnimatedHeading from '$lib/components/primitives/AnimatedHeading.svelte'
-	import { siteLoaded } from '$lib/stores/load'
-	import { writable } from 'svelte/store'
+	import AnimatedDescription from '$lib/components/transitions/AnimatedDescription.svelte'
+	import AnimatedHeading from '$lib/components/transitions/AnimatedHeading.svelte'
 </script>
 
 <InformationLayout>

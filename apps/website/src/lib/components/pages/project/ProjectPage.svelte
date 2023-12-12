@@ -1,8 +1,8 @@
 <script lang="ts">
 	import InformationLayout from '$lib/components/layouts/InformationLayout.svelte'
-	import AnimatedDescription from '$lib/components/primitives/AnimatedDescription.svelte'
-	import AnimatedHeading from '$lib/components/primitives/AnimatedHeading.svelte'
-	import type { ContentBlock } from '$lib/data/projects'
+	import AnimatedDescription from '$lib/components/transitions/AnimatedDescription.svelte'
+	import AnimatedHeading from '$lib/components/transitions/AnimatedHeading.svelte'
+	import type { ContentBlock } from '$lib/data/blocks'
 
 	export let contentBlock: ContentBlock
 </script>

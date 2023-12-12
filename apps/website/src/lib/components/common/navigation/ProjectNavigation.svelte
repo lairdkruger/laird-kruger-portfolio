@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { projects } from '$lib/data/projects'
-	import NavigationMonolith from '../primitives/NavigationMonolith.svelte'
+	import { projects } from '$lib/data/blocks'
+	import LinkMonolith from '$lib/components/primitives/LinkMonolith.svelte'
 </script>
 
 <div class="wrapper">
@@ -10,7 +10,7 @@
 
 	<div class="navigation">
 		{#each projects as project}
-			<NavigationMonolith route={`/projects/${project.slug}`} label={project.title} />
+			<LinkMonolith route={`/projects/${project.slug}`} label={project.title} />
 		{/each}
 	</div>
 </div>
