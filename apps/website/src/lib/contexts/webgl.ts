@@ -114,7 +114,8 @@ export function createWebglContext(key?: string) {
 		window.addEventListener('pointermove', (event) => {
 			handlePointerMove(event)
 		})
-		canvas.addEventListener('click', () => {
+		canvas.addEventListener('pointerdown', (event) => {
+			handlePointerMove(event)
 			handleClick()
 		})
 
