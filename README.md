@@ -4,8 +4,12 @@ My portfolio website for creative development and digital design.
 
 #### Frameworks
 
-[SvelteKit](https://kit.svelte.dev) | 
-[Three](https://threejs.org/) | 
+[Svelte](https://svelte.dev) |
+[SvelteKit](https://kit.svelte.dev)
+
+#### Libraries
+
+[Three](https://threejs.org/) |
 [Rapier](https://rapier.rs/)
 
 #### Styling
