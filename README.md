@@ -1,6 +1,6 @@
 # Laird Kruger Portfolio
 
-My portfolio website for creative development and digital design.
+My portfolio website showcasing creative development and digital design.
 
 #### Frameworks
 
@@ -18,12 +18,15 @@ My portfolio website for creative development and digital design.
 
 ##### Methodology
 
-The Svelte Javascript framework is useful for creating reusable web components, enabling reactivity and managing application state.
+The Svelte JavaScript framework is used for creating reusable web components, enabling reactivity and managing application state.
 
-Because Svelte is technically just a compiler, it works at a relatively low-level when compared to other frameworks like React and Vue.
-This means that Svelte essentially sits at the same level as the real DOM (no virtual DOM) - which makes it trivial to work with other Javascript libraries (like three.js) and native Web APIs.
+The main reason Svelte is used here as opposed to other popular JavaScript frameworks (React or Vue) is that Svelte works at compile-time rather than run-time.
+Operating at this lower level makes working with the DOM, native browser APIs and other JavaScript libraries (like three.js) much more trivial than the other frameworks.
 
-Typescript is used to maintain static type checking throughout the application. The only reason typescript is used over javascript (with JSDoc for typings) is that typescript files are generally more readable and concise to write.
+In this project specifically, you'll see that by implementing a basic Svelte context I've been able to use three.js declaratively (what react-three-fiber implements for React).
 
-The SvelteKit application framework is used to enable SPA behaviour while maintaining server-side rendering and standard routing for SEO.
-No CSS preprocessors are used as Modern CSS is powerful enough for all styling requirements, with dynamic variables, container queries etc.
+TypeScript is used to maintain static type checking throughout the application. The only reason TypeScript is used over JavaScript (with JSDoc for typings) is that TypeScript files are generally more readable and concise to write.
+
+The SvelteKit application framework is used to enable SPA behaviour while maintaining server-side rendering and standard routing for SEO benefits.
+
+For a project of this scale, I've done away with CSS preprocessors as Modern CSS is easily powerful enough for all styling requirements, with dynamic variables, container queries etc.
