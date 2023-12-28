@@ -32,7 +32,7 @@ export const information: ContentBlock[] = [
 			'Raised in Aotearoa, now Sunshine Coast based enjoying surfing, diving, music, movies and roadies',
 		credits: [
 			{
-				creditText: 'Music →',
+				creditText: 'Some of my music →',
 				linkText: 'Soundcloud',
 				link: 'https://soundcloud.com/lairdkruger'
 			},
@@ -60,36 +60,28 @@ export const information: ContentBlock[] = [
 			'Tools I use to create everything from simple portfolio websites to interactive 3D experiences and custom ecommerce storefronts:',
 		credits: [
 			{
-				linkText: 'Svelte',
-				link: 'https://svelte.dev/'
-			},
-			{
-				linkText: 'SvelteKit',
+				linkText: 'Svelte / SvelteKit',
 				link: 'https://kit.svelte.dev/'
 			},
 			{
-				linkText: 'React',
-				link: 'https://reactjs.org'
-			},
-			{
-				linkText: 'NextJS',
+				linkText: 'React / Next',
 				link: 'https://nextjs.org'
 			},
 			{
-				linkText: 'Threejs',
-				link: 'https://threejs.org'
-			},
-			{
-				linkText: 'Shopify',
-				link: 'https://www.shopify.com'
+				linkText: 'CSS / SASS',
+				link: 'https://sass-lang.com'
 			},
 			{
 				linkText: 'Sanity CMS',
 				link: 'https://www.sanity.io'
 			},
 			{
-				linkText: 'CSS/SASS',
-				link: 'https://sass-lang.com'
+				linkText: 'Shopify',
+				link: 'https://www.shopify.com'
+			},
+			{
+				linkText: 'Three',
+				link: 'https://threejs.org'
 			},
 			{
 				linkText: 'Web Audio API',
@@ -111,6 +103,21 @@ export const projects: ContentBlock[] = [
 		url: 'https://www.waveforms.app',
 		description:
 			'Concept + design + development of WAVEFORMS App → a collection of customisable realtime audio visualizers'
+	},
+	{
+		type: 'project',
+		title: '1/1 Portfolio',
+		slug: '1of1portfolio',
+		texture: '1of1portfolio.webp',
+		url: 'https://1of1studio.com',
+		description: 'Portfolio website for 1/1 studio → coded while working at 1/1\xa0Studio',
+		credits: [
+			{
+				creditText: 'Credit →',
+				linkText: '1/1 Studio',
+				link: 'https://1of1studio.com/'
+			}
+		]
 	},
 	{
 		type: 'project',
@@ -165,27 +172,12 @@ export const projects: ContentBlock[] = [
 	},
 	{
 		type: 'project',
-		title: '1/1 Portfolio',
-		slug: '1of1portfolio',
-		texture: '1of1portfolio.webp',
-		url: 'https://1of1studio.com',
-		description: 'Portfolio website for 1/1 studio → coded while working at 1/1\xa0Studio',
-		credits: [
-			{
-				creditText: 'Credit →',
-				linkText: '1/1 Studio',
-				link: 'https://1of1studio.com/'
-			}
-		]
-	},
-	{
-		type: 'project',
 		title: 'Embryonic',
 		slug: 'embryonic',
 		texture: 'Embryonic.webp',
 		url: 'https://www.embryonic.me/',
 		description:
-			'Blockchain NFT minting site for ARTHAUS project + Creation of template respository for future blockchain/NFT projects'
+			'Blockchain NFT minting site for ARTHAUS project and template respository for future blockchain/NFT projects'
 	},
 	{
 		type: 'project',
@@ -225,15 +217,15 @@ export const projects: ContentBlock[] = [
 		texture: '0xigami.webp',
 		url: 'https://www.behance.net/gallery/135850473/0xIGAMI-Brand-Guidelines',
 		description: 'Brand identity and guidelines for sci-fi blockchain project'
-	},
-	{
-		type: 'project',
-		title: 'Gallery',
-		slug: 'gallery',
-		texture: 'KieransGallery.webp',
-		url: 'https://www.kierankruger.photography',
-		description: "Gallery concept site featuring my brother's photography"
 	}
+	// {
+	// 	type: 'project',
+	// 	title: 'Gallery',
+	// 	slug: 'gallery',
+	// 	texture: 'KieransGallery.webp',
+	// 	url: 'https://www.kierankruger.photography',
+	// 	description: "Gallery concept site featuring my brother's photography"
+	// }
 	// {
 	// 	type: 'project',
 	// 	title: 'Newfoundland',
