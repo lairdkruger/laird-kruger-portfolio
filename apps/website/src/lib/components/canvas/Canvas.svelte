@@ -16,7 +16,10 @@
 	})
 
 	const loadTimeline = tweened(0, { ...motionDefault, delay: 0 })
-	$: loadTimeline.set($siteLoaded ? 1 : 0)
+	$: {
+		if (typeof window !== 'undefined')
+			loadTimeline.set($siteLoaded ? (window.innerWidth <= 640 ? 0.2 : 1) : 0)
+	}
 </script>
 
 <canvas class="canvas" bind:this={canvas} style="opacity: {$loadTimeline}" />

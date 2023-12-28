@@ -20,5 +20,9 @@
 		justify-content: flex-start;
 
 		text-align: center;
+
+		@media (max-width: 640px) {
+			height: auto;
+		}
 	}
 </style>

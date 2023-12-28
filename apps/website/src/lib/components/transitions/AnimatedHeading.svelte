@@ -87,7 +87,7 @@
 
 	.heading {
 		position: absolute;
-		text-wrap: nowrap;
+		white-space: nowrap;
 		pointer-events: none;
 	}
 
