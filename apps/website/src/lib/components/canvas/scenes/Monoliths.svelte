@@ -18,7 +18,7 @@
 	const sceneSize = new Vector3(10, 10, 10)
 
 	const slabs = [...projects, ...information]
-	const positionBounds = [-(sceneSize.y / 2 - 1), sceneSize.y / 2 - 1]
+	const positionBounds = [-(sceneSize.y / 2 - 1.5), sceneSize.y / 2 - 1.5]
 
 	const positions = slabs.map((_, index) => {
 		const z = map(index, 0, slabs.length - 1, positionBounds[0], positionBounds[1])

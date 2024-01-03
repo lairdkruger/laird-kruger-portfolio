@@ -4,6 +4,7 @@
 	import { tweened } from 'svelte/motion'
 	import { motionDefault } from '$lib/styles/motion'
 	import { siteLoaded } from '$lib/stores/loading'
+	import { browser } from '$app/environment'
 
 	// References
 	let canvas: HTMLCanvasElement
@@ -16,9 +17,10 @@
 	})
 
 	const loadTimeline = tweened(0, { ...motionDefault, delay: 0 })
+	const mobileOpacity = 0.35
+
 	$: {
-		if (typeof window !== 'undefined')
-			loadTimeline.set($siteLoaded ? (window.innerWidth <= 640 ? 0.2 : 1) : 0)
+		if (browser) loadTimeline.set($siteLoaded ? (window.innerWidth <= 640 ? mobileOpacity : 1) : 0)
 	}
 </script>
 

@@ -21,6 +21,9 @@
 	--wdthHeadingLarge: 150;
 
 	--fontSizeBase: 12px;
+	--lineHeightBase: 1.25;
+	--letterSpacingBase: 0.025em;
+	--fontWeightBase: 400;
 }
 
 html {
@@ -29,8 +32,13 @@ html {
 		'wdth' var(--wdthBody),
 		'wght' var(--wghtRegular);
 	font-size: var(--fontSizeBase);
-	line-height: 1.25;
+	line-height: var(--lineHeightBase);
+	font-weight: var(--fontWeightBase);
 	text-transform: uppercase;
+
+	text-rendering: optimizeLegibility;
+	-webkit-text-size-adjust: none;
+	-webkit-font-smoothing: antialiased;
 }
 
 h1,
@@ -43,14 +51,15 @@ h6 {
 		'wdth' var(--wdthHeading),
 		'wght' var(--wghtBold);
 	font-size: var(--fontSizeBase);
-	line-height: 1.25;
-	letter-spacing: 0.02em;
+	line-height: var(--lineHeightBase);
+	letter-spacing: var(--letterSpacingBase);
 }
 
 p {
 	font-variation-settings:
 		'wdth' var(--wdthBody),
 		'wght' var(--wghtRegular);
+	letter-spacing: 0.025em;
 }
 
 a,
@@ -61,14 +70,16 @@ button {
 		'wght' var(--wghtBold);
 	font-size: var(--fontSizeBase);
 	line-height: 1.25;
-	letter-spacing: 0.02em;
+	letter-spacing: 0.025em;
 
 	transition: opacity var(--motionDefault);
 }
 
-a:hover,
-button:hover {
-	opacity: 0.5;
+@media (hover: hover) {
+	a:hover,
+	button:hover {
+		opacity: 0.5;
+	}
 }
 
 a:disabled,

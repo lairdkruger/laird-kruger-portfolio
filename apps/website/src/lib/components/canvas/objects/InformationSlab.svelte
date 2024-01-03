@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
 	import { goto } from '$app/navigation'
 	import { getWebglContext } from '$lib/contexts/webgl'
 	import type { ContentBlock } from '$lib/data/blocks'
+	import { isTouchDevice } from '$lib/stores/browser'
 	import {
 		activeMass,
 		antiGravityForce,
@@ -62,7 +64,7 @@
 	$: isActiveProject = $activeProject === contentBlock.slug
 
 	// Texture
-	$: if (typeof window !== 'undefined') {
+	$: if (browser) {
 		const cubeTexture = new CubeTextureLoader().load([
 			`/textures/${contentBlock.texture}`,
 			`/textures/${contentBlock.texture}`,
@@ -111,17 +113,26 @@
 	onClick(() => {
 		// On Click
 		if (
+			!$isTouchDevice &&
 			$raycaster &&
-			$raycaster.intersectObject(mesh, false).length > 0 &&
-			$raycaster.intersectObject(mesh, false)[0].object.uuid === mesh.uuid
+			$raycaster?.intersectObjects(parent.children, false).length > 0 &&
+			$raycaster?.intersectObjects(parent.children, false)[0].object.uuid === mesh.uuid
 		) {
-			physicsBody?.applyImpulse({ x: 0, y: 0, z: impulseForce }, true)
 			activeProject.set(contentBlock.slug)
 			goto(`/${contentBlock.slug}`)
+
+			// Apply an impulse onClick only if already active
+			if (isActiveProject) physicsBody?.applyImpulse({ x: 0, y: 0, z: impulseForce }, true)
 		}
 	})
 
 	// Effects
+	// Impulse force
+	$: if ($userHasInteracted && isActiveProject) {
+		physicsBody?.applyImpulse({ x: 0, y: 0, z: impulseForce }, true)
+	}
+
+	// Gravity force
 	$: if ($userHasInteracted) {
 		if ($activeProjectType === 'information') {
 			physicsBody?.setGravityScale(0, true)

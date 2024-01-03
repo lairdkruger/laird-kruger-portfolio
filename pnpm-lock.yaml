@@ -20,6 +20,9 @@ importers:
       '@dimforge/rapier3d-compat':
         specifier: ^0.11.2
         version: 0.11.2
+      browser-utils:
+        specifier: workspace:browser-utils
+        version: link:../../packages/browser-utils
       gsap:
         specifier: ^3.12.3
         version: 3.12.3
@@ -78,6 +81,8 @@ importers:
       vite:
         specifier: ^4.4.2
         version: 4.5.0
+
+  packages/browser-utils: {}
 
   packages/maths-utils: {}
 

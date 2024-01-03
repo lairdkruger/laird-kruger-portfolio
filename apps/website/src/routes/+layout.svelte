@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '$lib/styles/reset.css'
 	import '$lib/styles/base.css'
 	import '$lib/styles/colors.css'
 	import '$lib/styles/motion.css'
@@ -15,6 +16,7 @@
 	import { tweened } from 'svelte/motion'
 	import { motionDefault } from '$lib/styles/motion'
 	import { onDestroy, onMount } from 'svelte'
+	import { browser } from '$app/environment'
 
 	export let data
 
@@ -29,11 +31,11 @@
 
 	onDestroy(() => {
 		svelteInitialized.set(false)
-		if (typeof window !== 'undefined') window.removeEventListener('click', handleClick)
+		if (browser) window.removeEventListener('click', handleClick)
 	})
 
 	// Global States
-	$: if (typeof window !== 'undefined') {
+	$: if (browser) {
 		if ($pageTheme === 'dark') {
 			document.body.dataset.theme = 'dark'
 		} else {
@@ -57,7 +59,7 @@
 	<Monoliths />
 
 	<main style="opacity: {$loadTimeline}">
-		<!-- Keying enables component transitions -->
+		<!-- Keying triggers component transitions -->
 		{#key data.pathname}
 			<slot />
 		{/key}

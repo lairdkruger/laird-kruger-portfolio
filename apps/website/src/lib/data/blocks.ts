@@ -57,7 +57,7 @@ export const information: ContentBlock[] = [
 		slug: 'technologies',
 		texture: 'technologies.webp',
 		description:
-			'Tools I use to create everything from simple portfolio websites to interactive 3D experiences and custom ecommerce storefronts:',
+			'Tools I use to create everything from simple portfolio websites to interactive 3D experiences and ecommerce storefronts:',
 		credits: [
 			{
 				linkText: 'Svelte / SvelteKit',
@@ -72,7 +72,7 @@ export const information: ContentBlock[] = [
 				link: 'https://sass-lang.com'
 			},
 			{
-				linkText: 'Sanity CMS',
+				linkText: 'Sanity',
 				link: 'https://www.sanity.io'
 			},
 			{
@@ -107,7 +107,7 @@ export const projects: ContentBlock[] = [
 	{
 		type: 'project',
 		title: '1/1 Portfolio',
-		slug: '1of1portfolio',
+		slug: '1of1-portfolio',
 		texture: '1of1portfolio.webp',
 		url: 'https://1of1studio.com',
 		description: 'Portfolio website for 1/1 studio → coded while working at 1/1\xa0Studio',

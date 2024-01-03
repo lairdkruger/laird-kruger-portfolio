@@ -63,10 +63,11 @@ export function createWebglContext(key?: string) {
 	}
 
 	function handleClick() {
-		userHasInteracted.set(true)
 		for (const callback of onClickCallbacks) {
 			callback()
 		}
+
+		userHasInteracted.set(true)
 	}
 
 	async function init(canvas: HTMLCanvasElement) {

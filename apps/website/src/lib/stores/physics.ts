@@ -7,7 +7,7 @@ export const slabSize = [
 	slabDimensions[2] * slabScale
 ]
 
-export const impulseForce = 40
+export const impulseForce = 60
 export const antiGravityForce = 20
 export const defaultMass = 1
 export const activeMass = 5

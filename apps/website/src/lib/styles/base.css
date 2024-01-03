@@ -1,41 +1,6 @@
-html {
-	scroll-behavior: auto;
-}
-
-/* Default Overrides */
 body {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-
-	text-rendering: optimizeLegibility;
-	-webkit-text-size-adjust: none;
-	-webkit-font-smoothing: antialiased;
-
-	scroll-behavior: auto;
-	overscroll-behavior: contain;
-	touch-action: pan-x;
-
 	background-color: var(--black);
 	color: var(--white);
-}
-
-body[data-theme='dark'] {
-	background-color: var(--black);
-	color: var(--white);
-}
-
-body[data-theme='light'] {
-	background-color: var(--white);
-	color: var(--white);
-}
-
-/* css resets */
-*,
-*::before,
-*::after {
-	box-sizing: inherit;
-	margin: 0;
 }
 
 div {
@@ -57,24 +22,15 @@ textarea {
 	pointer-events: auto;
 }
 
-input,
-button,
-textarea {
-	font-size: inherit;
-	font-family: inherit;
-	background-color: transparent;
-	color: inherit;
-	outline: none;
-	border: none;
-	margin: 0;
-	padding: 0;
+/* Themes */
+body[data-theme='dark'] {
+	background-color: var(--black);
+	color: var(--white);
 }
 
-a,
-button {
-	color: inherit;
-	text-decoration: none;
-	cursor: pointer;
+body[data-theme='light'] {
+	background-color: var(--white);
+	color: var(--white);
 }
 
 /* Extras */

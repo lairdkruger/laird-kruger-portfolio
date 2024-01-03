@@ -14,7 +14,7 @@
 	}
 
 	$: if ($camera) {
-		$camera.position.x = -$offsetX / 3
-		$camera.position.y = $offsetY / 3
+		$camera.position.x = $offsetX / 3
+		$camera.position.y = -$offsetY / 3
 	}
 </script>
