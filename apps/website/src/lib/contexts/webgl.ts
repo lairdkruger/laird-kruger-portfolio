@@ -1,5 +1,5 @@
 import { webglInitialized } from '$lib/stores/loading'
-import { userHasInteracted } from '$lib/stores/ui'
+import { userFirstInteraction, userHasInteracted } from '$lib/stores/ui'
 import RAPIER from '@dimforge/rapier3d-compat'
 import type { World } from '@dimforge/rapier3d-compat'
 import { getContext, setContext } from 'svelte'
@@ -41,6 +41,8 @@ export function createWebglContext(key?: string) {
 	const onResizeCallbacks: EventCallback[] = []
 	const clock = new Clock()
 
+	let interactionCount = 0
+
 	function handleResize() {
 		const camera = get(cameraCurrent)
 		const renderer = get(rendererCurrent)
@@ -63,11 +65,14 @@ export function createWebglContext(key?: string) {
 	}
 
 	function handleClick() {
+		userHasInteracted.set(true)
+		if (interactionCount > 1) userFirstInteraction.set(false)
+
 		for (const callback of onClickCallbacks) {
 			callback()
 		}
 
-		userHasInteracted.set(true)
+		interactionCount = interactionCount + 1
 	}
 
 	async function init(canvas: HTMLCanvasElement) {

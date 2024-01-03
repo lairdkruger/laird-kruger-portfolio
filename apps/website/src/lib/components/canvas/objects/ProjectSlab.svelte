@@ -15,7 +15,7 @@
 		slabSize
 	} from '$lib/stores/physics'
 	import { activeProject, activeProjectPosition, activeProjectType } from '$lib/stores/projects'
-	import { userHasInteracted } from '$lib/stores/ui'
+	import { userFirstInteraction, userHasInteracted } from '$lib/stores/ui'
 	import { motionDefault } from '$lib/styles/motion'
 	import type { RigidBody } from '@dimforge/rapier3d-compat'
 	import RAPIER from '@dimforge/rapier3d-compat'
@@ -140,7 +140,9 @@
 		if ($activeProjectType === 'project') {
 			physicsBody?.setGravityScale(0, true)
 			physicsBody?.setAdditionalMass(activeMass, true)
-			physicsBody?.applyImpulse({ x: 0, y: antiGravityForce, z: 0 }, true)
+
+			if (!$userFirstInteraction)
+				physicsBody?.applyImpulse({ x: 0, y: antiGravityForce, z: 0 }, true)
 
 			mesh.material.color = new Color(0xffffff)
 			mesh.material.needsUpdate = true
