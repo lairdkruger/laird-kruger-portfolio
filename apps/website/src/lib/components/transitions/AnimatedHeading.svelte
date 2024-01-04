@@ -40,7 +40,7 @@
 <div class="headings">
 	<div class="window top-left">
 		<h2
-			class="heading type_heading-large"
+			class="heading type_heading-large top-left"
 			in:transition={{ position: 'top-left' }}
 			out:transition={{ position: 'top-left' }}
 		>
@@ -49,7 +49,7 @@
 	</div>
 	<div class="window top-right">
 		<h2
-			class="heading type_heading-large"
+			class="heading type_heading-large top-right"
 			in:transition={{ position: 'top-right' }}
 			out:transition={{ position: 'top-right' }}
 		>
@@ -58,7 +58,7 @@
 	</div>
 	<div class="window bottom-right">
 		<h2
-			class="heading type_heading-large"
+			class="heading type_heading-large bottom-right"
 			in:transition={{ position: 'bottom-right' }}
 			out:transition={{ position: 'bottom-right' }}
 		>
@@ -67,7 +67,7 @@
 	</div>
 	<div class="window bottom-left">
 		<h2
-			class="heading type_heading-large"
+			class="heading type_heading-large bottom-left"
 			in:transition={{ position: 'bottom-left' }}
 			out:transition={{ position: 'bottom-left' }}
 		>

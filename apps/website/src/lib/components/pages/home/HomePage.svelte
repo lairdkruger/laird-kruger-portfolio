@@ -2,14 +2,18 @@
 	import InformationLayout from '$lib/components/layouts/InformationLayout.svelte'
 	import AnimatedDescription from '$lib/components/transitions/AnimatedDescription.svelte'
 	import AnimatedHeading from '$lib/components/transitions/AnimatedHeading.svelte'
+	import { svelteInitialized } from '$lib/stores/loading'
 </script>
 
-<InformationLayout>
-	<AnimatedHeading slot="heading">Laird Kruger</AnimatedHeading>
-	<AnimatedDescription slot="content">
-		<p class="description">Creative Developer and Digital Designer</p>
-	</AnimatedDescription>
-</InformationLayout>
+{#if $svelteInitialized}
+	<InformationLayout>
+		<AnimatedHeading slot="heading">Laird Kruger</AnimatedHeading>
+
+		<AnimatedDescription slot="content">
+			<p class="description">Creative Developer and Digital Designer</p>
+		</AnimatedDescription>
+	</InformationLayout>
+{/if}
 
 <style>
 	.description {
