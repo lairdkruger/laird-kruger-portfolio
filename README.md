@@ -20,13 +20,13 @@ My portfolio website showcasing creative development and digital design.
 
 The Svelte JavaScript framework is used for creating reusable web components, enabling reactivity and managing application state.
 
-The main reason Svelte is used here as opposed to other popular JavaScript frameworks (React or Vue) is that Svelte works at compile-time rather than run-time.
-Operating at this lower level makes working with the DOM, native browser APIs and other JavaScript libraries (like three.js) much more trivial than the other frameworks.
+The main reason Svelte is used here as opposed to other popular JavaScript frameworks (React or Vue) is that Svelte works at compile-time rather than runtime.
+Operating at this lower level makes working with the DOM, native browser APIs and other JavaScript libraries (like three.js) much more trivial than the other frameworks in my opinion.
 
 In this project specifically, you'll see that by implementing a basic Svelte context I've been able to use three.js declaratively (what react-three-fiber implements for React).
 
-TypeScript is used to maintain static type checking throughout the application. The only reason TypeScript is used over JavaScript (with JSDoc for typings) is that TypeScript files are generally more readable and concise to write.
+TypeScript is used to maintain static type checking throughout the application.
 
 The SvelteKit application framework is used to enable SPA behaviour while maintaining server-side rendering and standard routing for SEO benefits.
 
-For a project of this scale, I've done away with CSS preprocessors as Modern CSS is easily powerful enough for all styling requirements, with dynamic variables, container queries etc.
+For a project of this scale, I've done away with CSS preprocessors as modern CSS is easily powerful enough for all styling requirements, with dynamic variables, container queries etc.
