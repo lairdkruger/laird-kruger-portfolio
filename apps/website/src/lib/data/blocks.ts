@@ -200,7 +200,7 @@ export const projects: ContentBlock[] = [
 				link: 'https://www.psychoactive.co.nz'
 			}
 		]
-	},
+	}
 	// {
 	// 	type: 'project',
 	// 	title: 'Otherside',
@@ -210,14 +210,14 @@ export const projects: ContentBlock[] = [
 	// 	description:
 	// 		'Showcase of the development template used by Otherside Directory → a concept collective'
 	// },
-	{
-		type: 'project',
-		title: '0xigami',
-		slug: 'oxigami',
-		texture: '0xigami.webp',
-		url: 'https://www.behance.net/gallery/135850473/0xIGAMI-Brand-Guidelines',
-		description: 'Brand identity and guidelines for sci-fi blockchain project'
-	}
+	// {
+	// 	type: 'project',
+	// 	title: '0xigami',
+	// 	slug: 'oxigami',
+	// 	texture: '0xigami.webp',
+	// 	url: 'https://www.behance.net/gallery/135850473/0xIGAMI-Brand-Guidelines',
+	// 	description: 'Brand identity and guidelines for sci-fi blockchain project'
+	// }
 	// {
 	// 	type: 'project',
 	// 	title: 'Gallery',
