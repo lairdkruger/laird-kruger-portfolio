@@ -49,7 +49,7 @@ export const information: ContentBlock[] = [
 		slug: 'experience',
 		texture: 'experience.webp',
 		description:
-			'2019 → BsC in Computer Science and Philosophy → 2020 → Developer/Designer at Psychoactive Studios → 2021 → Independent developer and designer → 2023 → Developer at 1/1 Studio'
+			'2019 → BsC in Computer Science and Philosophy → 2020 → Developer/Designer at Psychoactive Studios → 2021 → Independent developer and designer → 2023 → Developer at 1/1 Studio → 2024 → Developer at Studio Untitled'
 	},
 	{
 		type: 'information',
@@ -60,16 +60,16 @@ export const information: ContentBlock[] = [
 			'Tools I use to create everything from simple portfolio websites to interactive 3D experiences and ecommerce storefronts:',
 		credits: [
 			{
-				linkText: 'Svelte / SvelteKit',
-				link: 'https://kit.svelte.dev/'
+				linkText: 'JS Frameworks (Astro, SvelteKit, Next.js)',
+				link: 'https://astro.build/'
 			},
 			{
-				linkText: 'React / Next',
-				link: 'https://nextjs.org'
+				linkText: 'Rust',
+				link: 'https://www.rust-lang.org/'
 			},
 			{
-				linkText: 'CSS / SASS',
-				link: 'https://sass-lang.com'
+				linkText: 'CSS',
+				link: 'https://www.w3schools.com/css/css_intro.asp'
 			},
 			{
 				linkText: 'Sanity',
