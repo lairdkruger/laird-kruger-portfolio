@@ -60,7 +60,7 @@ export const information: ContentBlock[] = [
 			'Tools I use to create everything from simple portfolio websites to interactive 3D experiences and ecommerce storefronts:',
 		credits: [
 			{
-				linkText: 'JS Frameworks (Astro, SvelteKit, Next.js)',
+				linkText: 'JS Frameworks (Astro, SvelteKit, NextJS)',
 				link: 'https://astro.build/'
 			},
 			{
@@ -80,7 +80,7 @@ export const information: ContentBlock[] = [
 				link: 'https://www.shopify.com'
 			},
 			{
-				linkText: 'Three',
+				linkText: 'ThreeJS',
 				link: 'https://threejs.org'
 			},
 			{
@@ -103,36 +103,6 @@ export const projects: ContentBlock[] = [
 		url: 'https://www.waveforms.app',
 		description:
 			'Concept + design + development of WAVEFORMS App → a collection of customisable realtime audio visualizers'
-	},
-	{
-		type: 'project',
-		title: '1/1 Portfolio',
-		slug: '1of1-portfolio',
-		texture: '1of1portfolio.webp',
-		url: 'https://1of1studio.com',
-		description: 'Portfolio website for 1/1 studio → coded while working at 1/1\xa0Studio',
-		credits: [
-			{
-				creditText: 'Credit →',
-				linkText: '1/1 Studio',
-				link: 'https://1of1studio.com/'
-			}
-		]
-	},
-	{
-		type: 'project',
-		title: 'Hyeja',
-		slug: 'hyeja',
-		texture: 'hyeja.webp',
-		url: 'https://www.hyejaskincare.com',
-		description: 'Custom Shopify storefront development for Hyeja Skincare → coded at 1/1\xa0Studio',
-		credits: [
-			{
-				creditText: 'Credit →',
-				linkText: '1/1 Studio',
-				link: 'https://1of1studio.com/'
-			}
-		]
 	},
 	{
 		type: 'project',
@@ -172,81 +142,41 @@ export const projects: ContentBlock[] = [
 	},
 	{
 		type: 'project',
-		title: 'Embryonic',
-		slug: 'embryonic',
-		texture: 'Embryonic.webp',
-		url: 'https://www.embryonic.me/',
-		description:
-			'Blockchain NFT minting site for ARTHAUS project and template respository for future blockchain/NFT projects'
+		title: '1/1 Portfolio',
+		slug: '1of1-portfolio',
+		texture: '1of1portfolio.webp',
+		url: 'https://1of1studio.com',
+		description: 'Portfolio website for 1/1 studio → coded while working at 1/1\xa0Studio',
+		credits: [
+			{
+				creditText: 'Credit →',
+				linkText: '1/1 Studio',
+				link: 'https://1of1studio.com/'
+			}
+		]
 	},
 	{
 		type: 'project',
-		title: 'Studio S II',
-		slug: 'studio-s-ii',
-		texture: 'StudioSII.webp',
-
-		url: 'https://www.studiosii.com',
-		description:
-			'Ecommerce site created for sci-fi Studio S II while working as a developer at Psychoactive\xa0Studios',
+		title: 'Hyeja',
+		slug: 'hyeja',
+		texture: 'hyeja.webp',
+		url: 'https://www.hyejaskincare.com',
+		description: 'Custom Shopify storefront development for Hyeja Skincare → coded at 1/1\xa0Studio',
 		credits: [
 			{
-				creditText: 'Design →',
-				linkText: 'Studio S II',
-				link: 'https://www.studiosii.com'
-			},
-			{
-				creditText: 'Dev →',
-				linkText: 'Psychoactive Studios',
-				link: 'https://www.psychoactive.co.nz'
+				creditText: 'Credit →',
+				linkText: '1/1 Studio',
+				link: 'https://1of1studio.com/'
 			}
 		]
+	},
+	{
+		type: 'project',
+		title: 'TBC',
+		slug: 'tbc',
+		texture: '0xigami.webp',
+		url: '#',
+		description:
+			'Currently working on a racing game written in Rust using a minimal-dependency custom 3D engine'
 	}
-	// {
-	// 	type: 'project',
-	// 	title: 'Otherside',
-	// 	slug: 'otherside',
-	// 	texture: 'Template.webp',
-	// 	url: 'https://www.otherside.directory/',
-	// 	description:
-	// 		'Showcase of the development template used by Otherside Directory → a concept collective'
-	// },
-	// {
-	// 	type: 'project',
-	// 	title: '0xigami',
-	// 	slug: 'oxigami',
-	// 	texture: '0xigami.webp',
-	// 	url: 'https://www.behance.net/gallery/135850473/0xIGAMI-Brand-Guidelines',
-	// 	description: 'Brand identity and guidelines for sci-fi blockchain project'
-	// }
-	// {
-	// 	type: 'project',
-	// 	title: 'Gallery',
-	// 	slug: 'gallery',
-	// 	texture: 'KieransGallery.webp',
-	// 	url: 'https://www.kierankruger.photography',
-	// 	description: "Gallery concept site featuring my brother's photography"
-	// }
-	// {
-	// 	type: 'project',
-	// 	title: 'Newfoundland',
-	// 	slug: 'newfoundland',
-	// 	texture: 'Newfoundland_001.webp',
-	// 	url: 'https://newfoundland.studio',
-	// 	description: 'Experimental case study website created for pseudostudio newfoundland'
-	// }
-	// {
-	// 	type: 'project',
-	// 	title: 'Lotties Study',
-	// 	slug: 'lotties-study',
-	// 	texture: 'Lotties.webp',
-	// 	url: 'https://lottie-demonstration.webflow.io/',
-	// 	description: 'Educational document exploring some advanced uses of the Lottie animation format',
-	// 	credits: [
-	// 		{
-	// 			creditText: 'Referenced By →',
-	// 			linkText: 'Create Lottie Layer',
-	// 			link: 'https://github.com/samcraigdev/create-lottie-layer'
-	// 		}
-	// 	]
-	// }
 ]
