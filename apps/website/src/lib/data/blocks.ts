@@ -49,7 +49,7 @@ export const information: ContentBlock[] = [
 		slug: 'experience',
 		texture: 'experience.webp',
 		description:
-			'2019 → BsC in Computer Science and Philosophy → 2020 → Developer/Designer at Psychoactive Studios → 2021 → Independent developer and designer → 2023 → Developer at 1/1 Studio → 2024 → Developer at Studio Untitled'
+			'2019 → BsC in Computer Science and Philosophy → 2020 → Developer/Designer at Psychoactive Studios → 2021 → Independent developer and designer → 2023 → Developer at 1/1 Studio → 2024 → Developer at Studio Untitled → Independent developer and designer'
 	},
 	{
 		type: 'information',
@@ -97,12 +97,78 @@ export const information: ContentBlock[] = [
 export const projects: ContentBlock[] = [
 	{
 		type: 'project',
-		title: 'WAVEFORMS',
-		slug: 'waveforms',
-		texture: 'waveforms.webp',
-		url: 'https://www.waveforms.app',
-		description:
-			'Concept + design + development of WAVEFORMS App → a collection of customisable realtime audio visualizers'
+		title: '1/1 Portfolio',
+		slug: '1of1-portfolio',
+		texture: '1of1portfolio.webp',
+		url: 'https://1of1studio.com',
+		description: 'Portfolio website for 1/1 studio → coded while working at 1/1\xa0Studio',
+		credits: [
+			{
+				creditText: 'Credit →',
+				linkText: '1/1 Studio',
+				link: 'https://1of1studio.com/'
+			},
+			{
+				creditText: 'Featured on →',
+				linkText: 'Klikkentheke',
+				link: 'https://klikkentheke.com/catalogue/1-1-studio/'
+			},
+			{
+				creditText: 'Featured on →',
+				linkText: 'The Responsive',
+				link: 'https://the-responsive.com/1-of-1-studio/'
+			}
+		]
+	},
+	{
+		type: 'project',
+		title: 'Hyeja',
+		slug: 'hyeja',
+		texture: 'hyeja.webp',
+		url: 'https://www.hyejaskincare.com',
+		description: 'Custom Shopify storefront development for Hyeja Skincare → coded at 1/1\xa0Studio',
+		credits: [
+			{
+				creditText: 'Credit →',
+				linkText: '1/1 Studio',
+				link: 'https://1of1studio.com/'
+			},
+			{
+				creditText: 'Featured on →',
+				linkText: 'Ecom Design Awards',
+				link: 'https://www.ecomdesignawards.com/websites/hyeja-skincare'
+			}
+		]
+	},
+	{
+		type: 'project',
+		title: 'Ne Geurra',
+		slug: 'ne-geurra',
+		texture: 'KieransGallery.webp',
+		url: 'https://www.negeurra.com/',
+		description: 'Archive for Ne Geurra → coded while working at 1/1\xa0Studio',
+		credits: [
+			{
+				creditText: 'Credit →',
+				linkText: '1/1 Studio',
+				link: 'https://1of1studio.com/'
+			},
+			{
+				creditText: 'Featured on →',
+				linkText: 'Hoverstat.es',
+				link: 'https://www.hoverstat.es/features/ne-geurra/'
+			},
+			{
+				creditText: 'Featured on →',
+				linkText: 'Siteinspire',
+				link: 'https://www.siteinspire.com/website/12368-ne-geurra'
+			},
+			{
+				creditText: 'Featured on →',
+				linkText: 'Klikkentheke',
+				link: 'https://klikkentheke.com/catalogue/ne-geurra/'
+			}
+		]
 	},
 	{
 		type: 'project',
@@ -142,41 +208,11 @@ export const projects: ContentBlock[] = [
 	},
 	{
 		type: 'project',
-		title: '1/1 Portfolio',
-		slug: '1of1-portfolio',
-		texture: '1of1portfolio.webp',
-		url: 'https://1of1studio.com',
-		description: 'Portfolio website for 1/1 studio → coded while working at 1/1\xa0Studio',
-		credits: [
-			{
-				creditText: 'Credit →',
-				linkText: '1/1 Studio',
-				link: 'https://1of1studio.com/'
-			}
-		]
-	},
-	{
-		type: 'project',
-		title: 'Hyeja',
-		slug: 'hyeja',
-		texture: 'hyeja.webp',
-		url: 'https://www.hyejaskincare.com',
-		description: 'Custom Shopify storefront development for Hyeja Skincare → coded at 1/1\xa0Studio',
-		credits: [
-			{
-				creditText: 'Credit →',
-				linkText: '1/1 Studio',
-				link: 'https://1of1studio.com/'
-			}
-		]
-	},
-	{
-		type: 'project',
-		title: 'TBC',
-		slug: 'tbc',
-		texture: '0xigami.webp',
-		url: '#',
+		title: 'WAVEFORMS',
+		slug: 'waveforms',
+		texture: 'waveforms.webp',
+		url: 'https://www.waveforms.app',
 		description:
-			'Currently working on a racing game written in Rust using a minimal-dependency custom 3D engine'
+			'Concept + design + development of WAVEFORMS App → a collection of customisable realtime audio visualizers'
 	}
 ]
