@@ -97,6 +97,15 @@ export const information: ContentBlock[] = [
 export const projects: ContentBlock[] = [
 	{
 		type: 'project',
+		title: 'Digital Meadow',
+		slug: 'digital-meadow',
+		texture: 'digitalmeadow.webp',
+		url: 'https://digitalmeadow.studio',
+		description: 'Studio website for Digital Meadow → a creative software studio',
+		credits: []
+	},
+	{
+		type: 'project',
 		title: '1/1 Portfolio',
 		slug: '1of1-portfolio',
 		texture: '1of1portfolio.webp',
