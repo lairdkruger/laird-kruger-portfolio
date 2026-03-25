@@ -217,11 +217,10 @@ export const projects: ContentBlock[] = [
 	},
 	{
 		type: 'project',
-		title: 'WAVEFORMS',
-		slug: 'waveforms',
+		title: 'FIELD STUDIES',
+		slug: 'field-studies',
 		texture: 'waveforms.webp',
-		url: 'https://www.waveforms.app',
-		description:
-			'Concept + design + development of WAVEFORMS App → a collection of customisable realtime audio visualizers'
+		url: 'https://www.fieldstudies.digitalmeadow.studio',
+		description: 'Ongoing experiments, tools and prototypes for interactive web experiences'
 	}
 ]
