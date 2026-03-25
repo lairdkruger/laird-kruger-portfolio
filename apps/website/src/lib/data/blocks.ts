@@ -220,7 +220,7 @@ export const projects: ContentBlock[] = [
 		title: 'FIELD STUDIES',
 		slug: 'field-studies',
 		texture: 'waveforms.webp',
-		url: 'https://www.fieldstudies.digitalmeadow.studio',
+		url: 'https://fieldstudies.digitalmeadow.studio',
 		description: 'Ongoing experiments, tools and prototypes for interactive web experiences'
 	}
 ]
